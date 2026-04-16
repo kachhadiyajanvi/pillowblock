@@ -314,8 +314,8 @@ nav {
     backdrop-filter: blur(25px);
     -webkit-backdrop-filter: blur(25px);
     border: 1px solid var(--border);
-    padding: 15px 0;
-    min-width: 260px;
+    padding: 10px 0; /* Precise 10px top/bottom padding */
+    min-width: 240px; 
     border-radius: 12px;
     opacity: 0;
     visibility: hidden;
@@ -333,19 +333,35 @@ nav {
 .dropdown-item {
     display: flex;
     align-items: center;
-    gap: 15px;
-    padding: 12px 25px;
+    justify-content: space-between !important;
+    padding: 12px 50px !important; /* Aggressive horizontal padding for clear change */
+    margin-bottom: 6px; 
     color: var(--text-main);
-    font-size: 13px;
+    font-size: 14px;
+    font-weight: 500;
     transition: var(--transition);
     border-left: 3px solid transparent;
+}
+
+.dropdown-item:last-child {
+    margin-bottom: 0;
+}
+
+
+/* Hidden decorative elements */
+.dropdown-item::after,
+.dropdown-all {
+    display: none !important;
+}
+
+.dropdown-item i {
+    display: none !important; /* Remove icons from submenus */
 }
 
 .dropdown-item:hover {
     background: rgba(0, 180, 216, 0.05);
     color: var(--primary);
     border-left-color: var(--primary);
-    padding-left: 30px;
 }
 
 .dropdown-item span {
@@ -403,7 +419,11 @@ nav {
     border-bottom: 1px solid rgba(0, 119, 182, 0.1);
     display: flex;
     align-items: center;
-    gap: 10px;
+    padding-left: 50px !important; /* Align with items */
+}
+
+.mega-title i {
+    display: none !important; /* Remove icons from mega menu titles */
 }
 
 .mega-list {
@@ -419,18 +439,26 @@ nav {
 .mega-item {
     display: flex;
     align-items: center;
-    gap: 12px;
+    justify-content: space-between !important;
     color: var(--text-muted);
     font-size: 13px;
     font-weight: 500;
     text-decoration: none;
     transition: all 0.3s ease;
-    padding: 5px 0;
+    padding: 10px 50px !important; /* Match dropdown padding */
+}
+
+.mega-item::after {
+    display: none !important;
+}
+
+.mega-item i {
+    display: none !important; /* Remove icons from mega items */
 }
 
 .mega-item:hover {
     color: var(--primary);
-    transform: translateX(5px);
+    background: rgba(0, 180, 216, 0.03); /* Subtle background for mega items too */
 }
 
 .mega-item i {
@@ -514,7 +542,7 @@ nav {
         background: transparent;
         border: none;
         box-shadow: none;
-        padding-left: 20px;
+        padding-left: 0 !important; /* Remove menu padding to rely on item padding */
         min-width: 100%;
     }
 
