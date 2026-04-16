@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Failure Source Diagnosis: Pillow Block Bearings | CNZ Bearings</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="progress-scanner" id="progressBar"></div>
+    <div class="blueprint-bg"></div>
+    <div class="industrial-overlay" style="z-index: 1;"></div>
+
+    <!-- Header / Navigation -->
+    <header>
+        <div class="container nav-container">
+            <nav style="position: relative; z-index: 10;">
+                <div class="logo-container">
+                    <a href="index.html" class="logo"><img src="assets/logo.png" alt="CNZ Bearings Logo"
+                            style="height: 45px;"></a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html"><i data-lucide="home"></i>Home</a></li>
+                    <li><a href="about.html"><i data-lucide="info"></i>About Us</a></li>
+                    <li class="has-dropdown">
+                        <a href="index.html#industries"><i data-lucide="factory"></i>Industries</a>
+                        <div class="dropdown-menu">
+                            <a href="industry-industrial.html" class="dropdown-item"><i data-lucide="anvil"></i><span>Heavy Industrial</span></a>
+                            <a href="industry-process.html" class="dropdown-item"><i data-lucide="flask-conical"></i><span>Process & Sciences</span></a>
+                            <a href="industry-infrastructure.html" class="dropdown-item"><i data-lucide="landmark"></i><span>Energy & Infrastructure</span></a>
+                        </div>
+                    </li>
+                    <li class="has-dropdown">
+                        <a href="index.html#products"><i data-lucide="component"></i>Products</a>
+                        <div class="dropdown-menu">
+                            <a href="product-ucp.html" class="dropdown-item"><i data-lucide="box"></i><span>UCP Series</span></a>
+                            <a href="product-ucf.html" class="dropdown-item"><i data-lucide="layers"></i><span>UCF Series</span></a>
+                            <a href="product-ucfl.html" class="dropdown-item"><i data-lucide="circle"></i><span>UCFL Series</span></a>
+                            <a href="product-ucfc.html" class="dropdown-item"><i data-lucide="disc"></i><span>UCFC Series</span></a>
+                            <a href="product-uct.html" class="dropdown-item"><i data-lucide="move-horizontal"></i><span>UCT Series</span></a>
+                        </div>
+                    </li>
+                    <li class="has-dropdown">
+                        <a href="news.html" class="active"><i data-lucide="megaphone"></i>News</a>
+                        <div class="dropdown-menu">
+                            <a href="news-events.html" class="dropdown-item"><i data-lucide="calendar"></i><span>Events</span></a>
+                            <a href="news-newsletters.html" class="dropdown-item"><i data-lucide="mail"></i><span>Newsletters</span></a>
+                            <a href="news-blogs.html" class="dropdown-item"><i data-lucide="layout-list"></i><span>Blogs & Articles</span></a>
+                        </div>
+                    </li>
+                    <li><a href="news-newsletters.html"><i data-lucide="download"></i>Downloads</a></li>
+                    <li><a href="contact.html"><i data-lucide="phone"></i>Contact Us</a></li>
+                </ul>
+                <div class="menu-toggle">
+                    <i data-lucide="menu"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-hero" style="background: linear-gradient(rgba(10, 13, 18, 0.8), rgba(10, 13, 18, 0.9)), url('assets/blog5_hero_1.jpg'); background-size: cover; background-position: center; padding: 100px 0 60px; border-bottom: 2px solid var(--primary); position: relative; z-index: 2;">
+        <div class="container">
+            <div class="hero-content">
+                <a href="news-blogs.html" style="color: var(--primary); display: flex; align-items: center; gap: 10px; margin-bottom: 25px; font-weight: 800; font-size: 14px; text-transform: uppercase; letter-spacing: 2px;">
+                    <i data-lucide="terminal" size="18"></i> CD .. / TECHNICAL_LIBRARY
+                </a>
+                <span style="font-size: 11px; font-weight: 900; letter-spacing: 4px; color: var(--primary); text-transform: uppercase;">DIAGNOSTICS PROTOCOL // 005</span>
+                <h1 style="font-size: clamp(2.5rem, 8vw, 4.5rem); color: #fff; line-height: 1.1; font-weight: 900; margin-top: 20px;">
+                    Failure Source Diagnosis:
+                    <span class="blue" style="display: block;">Identifying Root Causes</span>
+                </h1>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tactical Reading Console -->
+    <section class="section" style="padding-top: 80px; background: transparent; position: relative; z-index: 2;">
+        <div class="container" style="max-width: 1000px; margin: 0 auto;">
+            
+            <article class="article-console">
+                
+                <p class="focus-block">Pillow block bearings are widely used in industrial machinery because of their simple installation, reliable shaft support, and easy maintenance. They are commonly found in conveyor systems, agricultural equipment, packaging machines, and material handling systems.</p>
+                <p class="focus-block">However, even high-quality pillow block bearings can fail prematurely if operating conditions or maintenance practices are not properly managed. Most bearing failures occur due to installation errors, contamination, lubrication issues, or excessive loads.</p>
+                <p class="focus-block">Understanding the common causes of failure helps engineers and maintenance teams improve reliability and extend bearing service life.</p>
+
+                <h2 class="console-heading">Technical Failure Matrix: Top 7 Causes</h2>
+                
+                <div class="focus-block" style="border-left: 3px solid var(--primary); padding-left: 20px; margin-bottom: 35px;">
+                    <h3 style="color: #fff; font-size: 16px; font-weight: 800; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+                        <i data-lucide="droplet" size="18" color="var(--primary)"></i> 01 // Improper Lubrication
+                    </h3>
+                    <p style="margin: 0; font-size: 14px; color: var(--text-muted);">The most common cause (40%+). Manifests as over-greasing (blown seals), starvation, or using incompatible grease types that cause oxidative friction.</p>
+                </div>
+
+                <div class="focus-block" style="border-left: 3px solid var(--primary); padding-left: 20px; margin-bottom: 35px;">
+                    <h3 style="color: #fff; font-size: 16px; font-weight: 800; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+                        <i data-lucide="ruler" size="18" color="var(--primary)"></i> 02 // Dynamic Misalignment
+                    </h3>
+                    <p style="margin: 0; font-size: 14px; color: var(--text-muted);">When shaft angle exceeds self-alignment capacity (usually >2°). Results in uneven load distribution across raceways and rapid heat spikes.</p>
+                </div>
+
+                <div class="focus-block" style="border-left: 3px solid var(--primary); padding-left: 20px; margin-bottom: 35px;">
+                    <h3 style="color: #fff; font-size: 16px; font-weight: 800; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+                        <i data-lucide="shield-alert" size="18" color="var(--primary)"></i> 03 // Contamination Entry
+                    </h3>
+                    <p style="margin: 0; font-size: 14px; color: var(--text-muted);">Ingress of dust, moisture, or chemical agents. Foreign particles score the rolling elements, leading to catastrophic spalling.</p>
+                </div>
+
+                <div class="focus-block" style="border-left: 3px solid var(--primary); padding-left: 20px; margin-bottom: 35px;">
+                    <h3 style="color: #fff; font-size: 16px; font-weight: 800; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+                        <i data-lucide="database" size="18" color="var(--primary)"></i> 04 // Excessive Structural Load
+                    </h3>
+                    <p style="margin: 0; font-size: 14px; color: var(--text-muted);">Exceeding the Dynamic Load Rating (Cr). Causes sub-surface fatigue, deformation of the ball complement, and eventual locked rotation.</p>
+                </div>
+
+                <div class="focus-block" style="border-left: 3px solid var(--primary); padding-left: 20px; margin-bottom: 35px;">
+                    <h3 style="color: #fff; font-size: 16px; font-weight: 800; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+                        <i data-lucide="wrench" size="18" color="var(--primary)"></i> 05 // Incorrect Installation
+                    </h3>
+                    <p style="margin: 0; font-size: 14px; color: var(--text-muted);">Hammering, improper set-screw torque, or uneven housing bolt tension. Induces "Brinelling" (permanent raceway indentations) before the first run.</p>
+                </div>
+
+                <div class="focus-block" style="border-left: 3px solid var(--primary); padding-left: 20px; margin-bottom: 35px;">
+                    <h3 style="color: #fff; font-size: 16px; font-weight: 800; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+                        <i data-lucide="activity" size="18" color="var(--primary)"></i> 06 // Destructive Vibration
+                    </h3>
+                    <p style="margin: 0; font-size: 14px; color: var(--text-muted);">Continuous resonant vibration from unbalanced components. Causes "False Brinelling" where static vibration wears away material under the balls.</p>
+                </div>
+
+                <div class="focus-block" style="border-left: 3px solid var(--primary); padding-left: 20px; margin-bottom: 35px;">
+                    <h3 style="color: #fff; font-size: 16px; font-weight: 800; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+                        <i data-lucide="move" size="18" color="var(--primary)"></i> 07 // Poor Shaft Tolerance
+                    </h3>
+                    <p style="margin: 0; font-size: 14px; color: var(--text-muted);">Worn or undersized shafts cause the inner ring to spin on the shaft, generating high heat and destroying the bearing seat.</p>
+                </div>
+
+                <h2 class="console-heading">Early Warning Indicators</h2>
+                <div class="focus-block" style="background: rgba(255,255,255,0.03); padding: 25px; border-radius: 8px; margin: 30px 0;">
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        <li style="margin-bottom: 12px; display: flex; align-items: center; gap: 15px;">
+                            <span style="width: 8px; height: 8px; background: #FF8C00; border-radius: 50%;"></span>
+                            <span style="font-size: 14px;">Abnormal Acoustic Emissions (Grinding/Whining)</span>
+                        </li>
+                        <li style="margin-bottom: 12px; display: flex; align-items: center; gap: 15px;">
+                            <span style="width: 8px; height: 8px; background: #FF8C00; border-radius: 50%;"></span>
+                            <span style="font-size: 14px;">Thermal Spikes (>70°C above ambient)</span>
+                        </li>
+                        <li style="margin-bottom: 0; display: flex; align-items: center; gap: 15px;">
+                            <span style="width: 8px; height: 8px; background: #FF8C00; border-radius: 50%;"></span>
+                            <span style="font-size: 14px;">Visual Lubricant Leakage or Discoloration</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <h2 class="console-heading">Conclusion</h2>
+                <p class="focus-block">Pillow block bearings are reliable components used across many industries, but their performance depends heavily on proper installation, lubrication, and maintenance. Most failures occur due to avoidable issues such as contamination, misalignment, excessive load, or incorrect installation.</p>
+
+                <!-- Author block layout -->
+                <div class="article-author-card">
+                    <div class="card-bracket bracket-tl"></div>
+                    <div class="card-bracket bracket-tr"></div>
+                    <div class="card-bracket bracket-bl"></div>
+                    <div class="card-bracket bracket-br"></div>
+                    <div class="scan-line"></div>
+                    
+                    <div class="author-icon-box">
+                        <i data-lucide="shield-check" size="30" color="#fff"></i>
+                    </div>
+                    <div class="author-info">
+                        <h4>CNZ Bearings Engineering Team</h4>
+                        <p>Industrial Standards & Compliance Group</p>
+                    </div>
+                </div>
+
+            </article>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="caution-bar"></div>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <img src="assets/logo.png" alt="CNZ Bearings Logo" style="height: 60px; margin-bottom: 25px;">
+                    <p style="color: var(--text-muted);">Precision manufacturing since 1980. Delivering premium industrial bearing solutions across global borders.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="news.html">News Hub</a></li>
+                        <li><a href="news-blogs.html">Blogs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Connected Data</h4>
+                    <ul class="footer-contact">
+                        <li><i data-lucide="phone" size="18"></i> +91 8511153657</li>
+                        <li><i data-lucide="mail" size="18"></i> info@cnzbearings.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CNZ Bearings. ISO 9001 CERTIFIED.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp -->
+    <a href="https://wa.me/918511153657" class="whatsapp-float" style="left: 40px !important; right: auto !important;" target="_blank">
+        <i data-lucide="message-circle"></i>
+        <div class="wa-tooltip">Direct Support</div>
+        <div class="wa-pulse"></div>
+    </a>
+
+    <script src="main.js"></script>
+    <script>
+        lucide.createIcons();
+        window.addEventListener('scroll', () => {
+            const progressBar = document.getElementById('progressBar');
+            const totalHeight = document.body.scrollHeight - window.innerHeight;
+            const progress = (window.pageYOffset / totalHeight) * 100;
+            progressBar.style.width = progress + '%';
+        });
+    </script>
+</body>
+
+</html>

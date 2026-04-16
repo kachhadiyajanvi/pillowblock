@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Archive Protocol | CNZ Bearings - Knowledge Base</title>
+    <meta name="description"
+        content="In-depth engineering briefs, maintenance protocols, and material analysis for rotating equipment professionals. Access the CNZ technical repository.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --blueprint-line: rgba(255, 255, 255, 0.07);
+        }
+
+        body {
+            background-color: #06080c;
+            overflow-x: hidden;
+        }
+
+        /* Blueprint Grid Overlay */
+        .blueprint-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--blueprint-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--blueprint-line) 1px, transparent 1px);
+            background-size: 80px 80px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.8;
+        }
+
+        /* Tactical Split Hero */
+        .archive-hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 80vh;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            z-index: 2;
+            background: linear-gradient(rgba(6, 8, 12, 0.8), rgba(6, 8, 12, 0.9)), url('blogs_hero_archive_1775892793509.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-left {
+            padding: 120px 20px 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            max-width: 900px;
+        }
+
+        .hero-right {
+            display: none;
+        }
+
+        .hero-right::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(0, 163, 255, 0.1), 
+                rgba(0, 163, 255, 0.4), 
+                rgba(0, 163, 255, 0.1), 
+                transparent);
+            animation: scanLine 8s linear infinite;
+        }
+
+        @keyframes scanLine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Tactical Filters */
+        .filter-protocol {
+            padding: 60px 0 20px;
+            position: relative;
+            z-index: 3;
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            padding: 12px 25px;
+            font-size: 11px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+            backdrop-filter: blur(10px);
+        }
+
+        .filter-btn:hover {
+            color: var(--primary);
+            border-color: var(--primary);
+            background: rgba(0, 163, 255, 0.05);
+        }
+
+        .filter-btn.active {
+            color: #fff;
+            border-color: var(--primary);
+            background: var(--primary);
+            box-shadow: var(--glow-primary);
+        }
+
+        /* Dossier Grid */
+        .dossier-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 40px;
+            padding: 60px 0 120px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .dossier-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dossier-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), var(--glow-primary);
+        }
+
+        .dossier-card:hover .dossier-img {
+            transform: scale(1.1);
+        }
+
+        .dossier-img-wrap {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .dossier-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Filter: Grayscale removed by user request */
+            filter: contrast(1.05) saturate(1.1);
+            transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .dossier-content {
+            padding: 40px;
+            flex-grow: 1;
+        }
+
+        .file-id-tag {
+            font-size: 11px;
+            font-weight: 900;
+            color: var(--primary);
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .dossier-title {
+            font-size: 1.8rem;
+            color: #fff;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .dossier-excerpt {
+            color: var(--text-muted);
+            line-height: 1.8;
+            font-size: 15px;
+            margin-bottom: 30px;
+        }
+
+        .dossier-footer {
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 25px;
+            border-top: 1px solid var(--border);
+        }
+
+        .dossier-tag {
+            font-size: 10px;
+            font-weight: 900;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 1024px) {
+            .archive-hero { grid-template-columns: 1fr; }
+            .hero-right { height: 400px; }
+            .dossier-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .hero-left { padding: 120px 40px 60px; }
+            .filter-bar { gap: 10px; }
+            .dossier-content { padding: 30px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="blueprint-bg"></div>
+    <div class="industrial-overlay" style="z-index: 1;"></div>
+
+    <!-- Header / Navigation -->
+    <header>
+        <div class="container nav-container">
+            <nav style="position: relative; z-index: 10;">
+                <div class="logo-container">
+                    <a href="index.html" class="logo"><img src="assets/logo.png" alt="CNZ Bearings Logo"
+                            style="height: 45px;"></a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html"><i data-lucide="home"></i>Home</a></li>
+                    <li><a href="about.html"><i data-lucide="info"></i>About Us</a></li>
+                    <li class="has-dropdown">
+                        <a href="index.html#industries"><i data-lucide="factory"></i>Industries</a>
+                        <div class="dropdown-menu">
+                            <a href="industry-industrial.html" class="dropdown-item"><i data-lucide="anvil"></i><span>Heavy Industrial</span></a>
+                            <a href="industry-process.html" class="dropdown-item"><i data-lucide="flask-conical"></i><span>Process & Sciences</span></a>
+                            <a href="industry-infrastructure.html" class="dropdown-item"><i data-lucide="landmark"></i><span>Energy & Infrastructure</span></a>
+                        </div>
+                    </li>
+                    <li class="has-dropdown">
+                        <a href="index.html#products"><i data-lucide="component"></i>Products</a>
+                        <div class="dropdown-menu">
+                            <a href="product-ucp.html" class="dropdown-item"><i data-lucide="box"></i><span>UCP Series</span></a>
+                            <a href="product-ucf.html" class="dropdown-item"><i data-lucide="layers"></i><span>UCF Series</span></a>
+                            <a href="product-ucfl.html" class="dropdown-item"><i data-lucide="circle"></i><span>UCFL Series</span></a>
+                            <a href="product-ucfc.html" class="dropdown-item"><i data-lucide="disc"></i><span>UCFC Series</span></a>
+                            <a href="product-uct.html" class="dropdown-item"><i data-lucide="move-horizontal"></i><span>UCT Series</span></a>
+                        </div>
+                    </li>
+                    <li class="has-dropdown">
+                        <a href="news.html" class="active"><i data-lucide="megaphone"></i>News</a>
+                        <div class="dropdown-menu">
+                            <a href="news-events.html" class="dropdown-item"><i data-lucide="calendar"></i><span>Events</span></a>
+                            <a href="news-newsletters.html" class="dropdown-item"><i data-lucide="mail"></i><span>Newsletters</span></a>
+                            <a href="news-blogs.html" class="dropdown-item"><i data-lucide="layout-list"></i><span>Blogs & Articles</span></a>
+                        </div>
+                    </li>
+                    <li><a href="news-newsletters.html"><i data-lucide="download"></i>Downloads</a></li>
+                    <li><a href="contact.html"><i data-lucide="phone"></i>Contact Us</a></li>
+                </ul>
+                <div class="menu-toggle">
+                    <i data-lucide="menu"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Split Hero -->
+    <section class="archive-hero">
+        <div class="hero-left">
+            <a href="news.html" style="color: var(--primary); display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 30px; font-weight: 900; font-size: 11px; text-transform: uppercase; letter-spacing: 2px;">
+                <i data-lucide="terminal" size="16"></i> CD .. / NEWS_HUB
+            </a>
+            <div class="protocol-header" style="font-size: 11px; font-weight: 900; letter-spacing: 5px; color: var(--primary); margin-bottom: 20px; text-transform: uppercase;">TECHNICAL REPOSITORY // ARCHIVE.72</div>
+            <h1 style="font-size: clamp(3rem, 10vw, 5rem); color: #fff; line-height: 0.9; font-weight: 900; margin-bottom: 35px;">
+                TECHNICAL <span class="blue">ARCHIVE.</span><br>KNOWLEDGE CORE.
+            </h1>
+            <p style="color: var(--text-muted); font-size: 1.25rem; line-height: 1.7; max-width: 600px; margin-bottom: 50px;">
+                Access-restricted engineering briefs, maintenance protocols, and material science analysis for industrial rotating equipment professionals.
+            </p>
+            <div style="display: flex; gap: 60px; justify-content: center;">
+                <div style="text-align: center;">
+                    <span style="display: block; font-size: 2.5rem; font-weight: 900; color: #fff; line-height: 1;">10</span>
+                    <span style="font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--primary);">Full Dossiers</span>
+                </div>
+                <div style="text-align: center;">
+                    <span style="display: block; font-size: 2.5rem; font-weight: 900; color: #fff; line-height: 1;">08</span>
+                    <span style="font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--primary);">Core Categories</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-right"></div>
+    </section>
+
+    <!-- Tactical Filter Protocol -->
+    <section class="filter-protocol">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 10px;">
+                <div>
+                    <span style="display: block; font-size: 10px; font-weight: 900; color: var(--primary); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px;">SELECTION_PROTOCOL</span>
+                    <h2 style="color: #fff; font-size: 2.5rem; font-weight: 900; margin: 0;">TECHNICAL LIBRARY</h2>
+                </div>
+            </div>
+            
+            <div class="filter-bar">
+                <button class="filter-btn active" data-filter="all">ALL ARCHIVES</button>
+                <button class="filter-btn" data-filter="engineering">ENGINEERING</button>
+                <button class="filter-btn" data-filter="maintenance">MAINTENANCE</button>
+                <button class="filter-btn" data-filter="materials">MATERIALS</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Dossier Grid -->
+    <section class="archive-grid-section">
+        <div class="container">
+            <div class="dossier-grid">
+                
+                <!-- DOSSIER: 001 PILLOW BLOCK GUIDE -->
+                <div class="dossier-card" data-category="engineering" onclick="window.location='blog-pillow-block.html'">
+                    <div class="dossier-img-wrap">
+                        <img src="assets/hero_bearing.jpg" alt="Pillow Block Guide" class="dossier-img">
+                        <div class="card-scan" style="background: linear-gradient(to bottom, transparent, rgba(0, 163, 255, 0.2), transparent);"></div>
+                    </div>
+                    <div class="dossier-content">
+                        <span class="file-id-tag">[FILE: ARCHIVE.001]</span>
+                        <h3 class="dossier-title">WHAT IS A PILLOW BLOCK?</h3>
+                        <p class="dossier-excerpt">Comprehensive foundation for engineers. Learn internal geometry, housing standards, and mounting strategies.</p>
+                        <div class="dossier-footer">
+                            <span class="dossier-tag">CORE RESOURCE</span>
+                            <span style="color: var(--primary);"><i data-lucide="chevron-right"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DOSSIER: 002 PILLOW TYPES -->
+                <div class="dossier-card" data-category="engineering" onclick="window.location='blog-pillow-types.html'">
+                    <div class="dossier-img-wrap">
+                        <img src="assets/blog2_hero_1.jpg" alt="Bearing Types" class="dossier-img">
+                    </div>
+                    <div class="dossier-content">
+                        <span class="file-id-tag">[FILE: ARCHIVE.002]</span>
+                        <h3 class="dossier-title">PRODUCT TYPES EXPLAINED</h3>
+                        <p class="dossier-excerpt">Breakdown of housing designs and how to choose the correct bearing unit for specific industrial configurations.</p>
+                        <div class="dossier-footer">
+                            <span class="dossier-tag">TECHNICAL PAPER</span>
+                            <span style="color: var(--primary);"><i data-lucide="chevron-right"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DOSSIER: 003 VS PLUMMER -->
+                <div class="dossier-card" data-category="engineering" onclick="window.location='blog-pillow-vs-plummer.html'">
+                    <div class="dossier-img-wrap">
+                        <img src="assets/blog3_hero_1.jpg" alt="Comparison" class="dossier-img">
+                    </div>
+                    <div class="dossier-content">
+                        <span class="file-id-tag">[FILE: ARCHIVE.003]</span>
+                        <h3 class="dossier-title">PILLOW VS PLUMMER BLOCK</h3>
+                        <p class="dossier-excerpt">Key structural differences and application guidelines for mounted housings in heavy industry.</p>
+                        <div class="dossier-footer">
+                            <span class="dossier-tag">COMPARISON</span>
+                            <span style="color: var(--primary);"><i data-lucide="chevron-right"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DOSSIER: 004 INSTALLATION -->
+                <div class="dossier-card" data-category="maintenance" onclick="window.location='blog-pillow-installation.html'">
+                    <div class="dossier-img-wrap">
+                        <img src="assets/blog4_hero_1.jpg" alt="Installation" class="dossier-img">
+                    </div>
+                    <div class="dossier-content">
+                        <span class="file-id-tag">[FILE: ARCHIVE.004]</span>
+                        <h3 class="dossier-title">CORE INSTALLATION STAGE</h3>
+                        <p class="dossier-excerpt">Precision walkthrough on shaft preparation, mounting torque specs, and final verification checklists.</p>
+                        <div class="dossier-footer">
+                            <span class="dossier-tag">MAINTENANCE</span>
+                            <span style="color: var(--primary);"><i data-lucide="chevron-right"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DOSSIER: 005 FAILURES -->
+                <div class="dossier-card" data-category="maintenance" onclick="window.location='blog-pillow-failures.html'">
+                    <div class="dossier-img-wrap">
+                        <img src="assets/blog5_hero_1.jpg" alt="Failures" class="dossier-img">
+                    </div>
+                    <div class="dossier-content">
+                        <span class="file-id-tag">[FILE: ARCHIVE.005]</span>
+                        <h3 class="dossier-title">FAILURE SOURCE DIAGNOSIS</h3>
+                        <p class="dossier-excerpt">Critical analysis of lubrication and alignment issues. Identifying root causes in aggressive field environments.</p>
+                        <div class="dossier-footer">
+                            <span class="dossier-tag">DIAGNOSTICS</span>
+                            <span style="color: var(--primary);"><i data-lucide="chevron-right"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DOSSIER: 006 MATERIALS -->
+                <div class="dossier-card" data-category="materials" onclick="window.location='blog-pillow-materials.html'">
+                    <div class="dossier-img-wrap">
+                        <img src="assets/blog8_hero_1.jpg" alt="Materials" class="dossier-img">
+                    </div>
+                    <div class="dossier-content">
+                        <span class="file-id-tag">[FILE: ARCHIVE.006]</span>
+                        <h3 class="dossier-title">ALLOY & MATERIAL SCIENCE</h3>
+                        <p class="dossier-excerpt">Structural comparison between various industrial housing alloys: Cast Iron vs Stainless Steel.</p>
+                        <div class="dossier-footer">
+                            <span class="dossier-tag">MATERIAL SCAN</span>
+                            <span style="color: var(--primary);"><i data-lucide="chevron-right"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DOSSIER: 007 SELECTION -->
+                <div class="dossier-card" data-category="engineering" onclick="window.location='blog-pillow-selection.html'">
+                    <div class="dossier-img-wrap">
+                        <img src="assets/ind_construction_user.jpg" alt="Selection Logic" class="dossier-img">
+                    </div>
+                    <div class="dossier-content">
+                        <span class="file-id-tag">[FILE: ARCHIVE.007]</span>
+                        <h3 class="dossier-title">HEAVY LOAD SELECTION</h3>
+                        <p class="dossier-excerpt">Engineering logic for choosing the correct bearing units for high-stress manufacturing environments.</p>
+                        <div class="dossier-footer">
+                            <span class="dossier-tag">ENGINEERING</span>
+                            <span style="color: var(--primary);"><i data-lucide="chevron-right"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DOSSIER: 008 CONVEYORS -->
+                <div class="dossier-card" data-category="engineering" onclick="window.location='blog-pillow-conveyors.html'">
+                    <div class="dossier-img-wrap">
+                        <img src="assets/ind_logistics_user.jpg" alt="Conveyors" class="dossier-img">
+                    </div>
+                    <div class="dossier-content">
+                        <span class="file-id-tag">[FILE: ARCHIVE.008]</span>
+                        <h3 class="dossier-title">CONVEYOR DYNAMICS</h3>
+                        <p class="dossier-excerpt">Optimizing pillow block performance in continuous-duty logistics and bulk material transport systems.</p>
+                        <div class="dossier-footer">
+                            <span class="dossier-tag">TECHNICAL PAPER</span>
+                            <span style="color: var(--primary);"><i data-lucide="chevron-right"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DOSSIER: 009 LUBRICATION -->
+                <div class="dossier-card" data-category="maintenance" onclick="window.location='blog-pillow-lubrication.html'">
+                    <div class="dossier-img-wrap">
+                        <img src="assets/blog9_hero_1.jpg" alt="Lubrication" class="dossier-img">
+                    </div>
+                    <div class="dossier-content">
+                        <span class="file-id-tag">[FILE: ARCHIVE.009]</span>
+                        <h3 class="dossier-title">LUBRICATION PROTOCOLS</h3>
+                        <p class="dossier-excerpt">Advanced grease selection and interval strategies for extending industrial component lifecycle.</p>
+                        <div class="dossier-footer">
+                            <span class="dossier-tag">MAINTENANCE</span>
+                            <span style="color: var(--primary);"><i data-lucide="chevron-right"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DOSSIER: 010 MOUNTING ERRORS -->
+                <div class="dossier-card" data-category="maintenance" onclick="window.location='blog-pillow-installation-errors.html'">
+                    <div class="dossier-img-wrap">
+                        <img src="assets/blog10_hero_1.jpg" alt="Mounting Errors" class="dossier-img">
+                    </div>
+                    <div class="dossier-content">
+                        <span class="file-id-tag">[FILE: ARCHIVE.010]</span>
+                        <h3 class="dossier-title">CRITICAL MOUNTING ERRORS</h3>
+                        <p class="dossier-excerpt">Analyzing common technical mistakes during the mounting process and how to eliminate them.</p>
+                        <div class="dossier-footer">
+                            <span class="dossier-tag">DIAGNOSTICS</span>
+                            <span style="color: var(--primary);"><i data-lucide="chevron-right"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="caution-bar"></div>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <img src="assets/logo.png" alt="CNZ Bearings Logo" style="height: 60px; margin-bottom: 20px;">
+                    <p style="color: var(--text-muted);">Precision manufacturing since 1980. High-performance technical components for global industrial leaders.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="news.html">News Hub</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Connected Data</h4>
+                    <ul class="footer-contact">
+                        <li><i data-lucide="phone" size="18"></i> +91 8511153657</li>
+                        <li><i data-lucide="mail" size="18"></i> info@cnzbearings.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CNZ Bearings. ISO 9001 CERTIFIED.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Industrial Product Hub (Fixed Global) -->
+    <div class="product-hub-wrapper" id="hubWrapper">
+        <div class="product-hub-subs">
+            <a href="product-ucp.html" class="hub-sub" style="--i:0;">
+                <i data-lucide="box"></i>
+                <span class="hub-sub-label">UCP</span>
+            </a>
+            <a href="product-ucf.html" class="hub-sub" style="--i:1;">
+                <i data-lucide="layers"></i>
+                <span class="hub-sub-label">UCF</span>
+            </a>
+            <a href="product-ucfl.html" class="hub-sub" style="--i:2;">
+                <i data-lucide="circle"></i>
+                <span class="hub-sub-label">UCFL</span>
+            </a>
+            <a href="product-ucfc.html" class="hub-sub" style="--i:3;">
+                <i data-lucide="disc"></i>
+                <span class="hub-sub-label">UCFC</span>
+            </a>
+            <a href="product-uct.html" class="hub-sub" style="--i:4;">
+                <i data-lucide="move-horizontal"></i>
+                <span class="hub-sub-label">UCT</span>
+            </a>
+        </div>
+        <div class="product-hub-float" id="hubTrigger" aria-label="Open Product Navigator">
+            <div class="hub-center-content">
+                <i data-lucide="package"></i>
+                <span class="hub-main-label">PRODUCT</span>
+            </div>
+            <div class="hub-pulse"></div>
+        </div>
+    </div>
+
+    <!-- WhatsApp Floating Button (Repositioned to Left) -->
+    <a href="https://wa.me/918511153657" class="whatsapp-float" style="left: 40px !important; right: auto !important;" target="_blank" aria-label="Contact on WhatsApp">
+        <i data-lucide="message-circle"></i>
+        <div class="wa-tooltip">Direct Support</div>
+        <div class="wa-pulse"></div>
+    </a>
+
+    <script src="main.js"></script>
+    <script>
+        lucide.createIcons();
+
+        // Industrial Hub Interaction
+        const hubTrigger = document.getElementById('hubTrigger');
+        const hubWrapper = document.getElementById('hubWrapper');
+
+        if (hubTrigger && hubWrapper) {
+            hubTrigger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                hubWrapper.classList.toggle('active');
+            });
+
+            // Close when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!hubWrapper.contains(e.target)) {
+                    hubWrapper.classList.remove('active');
+                }
+            });
+        }
+
+        // Archive Filter Logic
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const dossiers = document.querySelectorAll('.dossier-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active state
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.getAttribute('data-filter');
+
+                dossiers.forEach(card => {
+                    const category = card.getAttribute('data-category');
+                    
+                    if (filter === 'all' || filter === category) {
+                        card.style.display = 'flex';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0) scale(1)';
+                        }, 10);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px) scale(0.95)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 400);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

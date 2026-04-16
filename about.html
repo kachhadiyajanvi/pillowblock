@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heritage Narrative | CNZ Bearings - Pure Engineering</title>
+    <meta name="description"
+        content="Dive into the CNZ Bearings technical architecture. A focus on precision manufacturing and industrial reliability.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --blueprint-line: rgba(255, 255, 255, 0.07);
+        }
+
+        body {
+            background-color: #06080c;
+            overflow-x: hidden;
+        }
+
+        /* Blueprint Grid Overlay */
+        .blueprint-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--blueprint-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--blueprint-line) 1px, transparent 1px);
+            background-size: 80px 80px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Pure Typographic Hero */
+        .hero-typographic {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 200px 40px 100px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero-typographic-content {
+            max-width: 1000px;
+        }
+
+        .protocol-header {
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 5px;
+            color: var(--primary);
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        /* Technical Spotlight Effect */
+        .cursor-spotlight {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle 400px at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(0, 163, 255, 0.1), transparent 80%);
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .hero-typographic:hover .cursor-spotlight {
+            opacity: 1;
+        }
+
+        .hero-typographic h1 {
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            cursor: default;
+        }
+
+        .hero-typographic h1:hover {
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            transform: scale(1.02);
+            letter-spacing: 2px;
+        }
+
+        .hero-typographic h1 span.blue {
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            display: inline-block;
+        }
+
+        .hero-typographic h1:hover span.blue {
+            text-shadow: 0 0 30px rgba(0, 163, 255, 0.8);
+            letter-spacing: 4px;
+        }
+
+        .stat-col {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            padding: 20px;
+            border-radius: 4px;
+            cursor: default;
+        }
+
+        .stat-col:hover {
+            background: rgba(0, 163, 255, 0.05);
+            transform: translateY(-10px) scale(1.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-col:hover span:first-child {
+            color: var(--primary);
+            text-shadow: var(--glow-primary);
+        }
+
+        /* Technical Narrative Sections (No Image) */
+        .tech-narrative-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 60px;
+            padding: 100px 0;
+        }
+
+        .narrative-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-left: 4px solid var(--primary);
+            padding: 50px;
+            position: relative;
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            overflow: hidden;
+            border-radius: 2px;
+        }
+
+        .narrative-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(0, 163, 255, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 0 30px rgba(0, 163, 255, 0.05);
+        }
+
+        /* Tactical HUD Brackets */
+        .card-bracket {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            border: 1px solid var(--primary);
+            opacity: 0.3;
+            transition: all 0.4s ease;
+            pointer-events: none;
+        }
+        .narrative-card:hover .card-bracket {
+            opacity: 1;
+            width: 30px;
+            height: 30px;
+            border-width: 2px;
+            filter: drop-shadow(0 0 5px var(--primary));
+        }
+
+        .bracket-tl { top: 15px; left: 15px; border-right: none; border-bottom: none; }
+        .bracket-tr { top: 15px; right: 15px; border-left: none; border-bottom: none; }
+        .bracket-bl { bottom: 15px; left: 15px; border-right: none; border-top: none; }
+        .bracket-br { bottom: 15px; right: 15px; border-left: none; border-top: none; }
+
+        /* Scanning Animation */
+        .scan-line {
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            opacity: 0;
+            z-index: 5;
+            pointer-events: none;
+        }
+
+        .narrative-card:hover .scan-line {
+            animation: scanLine 3s linear infinite;
+            opacity: 0.5;
+        }
+
+        @keyframes scanLine {
+            0% { top: 0%; opacity: 0; }
+            10% { opacity: 0.5; }
+            50% { opacity: 0.2; }
+            90% { opacity: 0.5; }
+            100% { top: 100%; opacity: 0; }
+        }
+
+        .narrative-card h2 {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .narrative-id-tag {
+            font-size: 10px;
+            font-weight: 900;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            display: block;
+            letter-spacing: 2px;
+        }
+
+        /* Blueprint Timeline */
+        .blueprint-timeline {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .timeline-vertical-pipe {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: var(--border);
+            transform: translateX(-50%);
+        }
+
+        .milestone-item {
+            width: 45%;
+            margin-bottom: 100px;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .milestone-item:hover .milestone-dot {
+            transform: scale(1.8);
+            box-shadow: 0 0 30px var(--primary);
+        }
+
+        .milestone-item:hover .milestone-year {
+            color: var(--primary);
+            opacity: 1;
+        }
+
+        .milestone-item.left { margin-right: 55%; text-align: right; }
+        .milestone-item.right { margin-left: 55%; text-align: left; }
+
+        .milestone-dot {
+            position: absolute;
+            top: 10px;
+            width: 14px;
+            height: 14px;
+            background: var(--primary);
+            border: 3px solid var(--secondary);
+            border-radius: 50%;
+            box-shadow: var(--glow-primary);
+            z-index: 2;
+        }
+
+        .left .milestone-dot { right: -11%; }
+        .right .milestone-dot { left: -11%; }
+
+        .milestone-year {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #fff;
+            line-height: 1;
+        }
+
+        /* Founder ID Badges */
+        .leader-id-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+            margin-top: 60px;
+        }
+
+        .id-badge {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 50px 30px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 25px;
+            border-radius: 4px;
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .id-badge::before {
+            content: 'DIRECTORATE // BOARD';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 163, 255, 0.05);
+            color: var(--primary);
+            font-size: 8px;
+            font-weight: 900;
+            padding: 10px 0;
+            letter-spacing: 2px;
+            border-bottom: 1px solid rgba(0, 163, 255, 0.1);
+        }
+
+        .id-badge:hover {
+            background: rgba(0, 163, 255, 0.04);
+            border-color: var(--primary);
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(0, 163, 255, 0.05);
+        }
+
+        .badge-photo {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .id-badge:hover .badge-photo {
+            border-color: var(--primary);
+            box-shadow: 0 0 25px rgba(0, 163, 255, 0.4);
+            transform: scale(1.05);
+        }
+
+        .badge-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(1);
+            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .id-badge:hover .badge-photo img {
+            filter: grayscale(0);
+        }
+
+        .badge-info h4 {
+            color: #fff;
+            font-size: 1.4rem;
+            font-weight: 900;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .badge-info span {
+            font-size: 10px;
+            text-transform: uppercase;
+            color: var(--primary);
+            font-weight: 800;
+            letter-spacing: 2px;
+            display: block;
+        }
+
+        .video-console {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+            border-radius: 4px;
+        }
+
+        .video-frame {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background: #000;
+            border: 1px solid var(--primary);
+            box-shadow: var(--glow-primary);
+            border-radius: 2px;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .video-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-hud-corner {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--primary);
+            z-index: 5;
+            pointer-events: none;
+        }
+        .corner-tl { top: -4px; left: -4px; border-right: none; border-bottom: none; }
+        .corner-tr { top: -4px; right: -4px; border-left: none; border-bottom: none; }
+        .corner-bl { bottom: -4px; left: -4px; border-right: none; border-top: none; }
+        .corner-br { bottom: -4px; right: -4px; border-left: none; border-top: none; }
+
+        .video-metadata {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-family: 'Inter', sans-serif;
+            font-size: 10px;
+            font-weight: 800;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            opacity: 0.8;
+        }
+
+        .video-metadata span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .certification-grid {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 60px;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid var(--border);
+            padding: 60px;
+            border-radius: 4px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cert-display-frame {
+            position: relative;
+            padding: 15px;
+            background: #fff;
+            border: 1px solid var(--primary);
+            box-shadow: var(--glow-primary);
+            transition: all 0.4s ease;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .cert-display-frame:hover {
+            transform: scale(1.02) perspective(1000px) rotateY(-5deg);
+            box-shadow: 0 0 40px rgba(0, 163, 255, 0.3);
+        }
+
+        .cert-display-frame img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .hud-corner-line {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 1px solid var(--primary);
+            pointer-events: none;
+        }
+        .hud-corner-line.tl { top: -10px; left: -10px; border-right: none; border-bottom: none; }
+        .hud-corner-line.tr { top: -10px; right: -10px; border-left: none; border-bottom: none; }
+        .hud-corner-line.bl { bottom: -10px; left: -10px; border-right: none; border-top: none; }
+        .hud-corner-line.br { bottom: -10px; right: -10px; border-left: none; border-top: none; }
+
+        .technical-dossier {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .dossier-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .dossier-item:hover {
+            background: rgba(0, 163, 255, 0.03);
+            padding-left: 10px;
+        }
+
+        .dossier-label {
+            font-size: 10px;
+            font-weight: 900;
+            color: var(--primary);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .dossier-value {
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            text-align: right;
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            .hero-typographic { min-height: 70vh; padding-top: 150px; }
+            .tech-narrative-grid { grid-template-columns: 1fr; }
+            .timeline-vertical-pipe { left: 20px; transform: none; }
+            .milestone-item { width: 100%; margin-left: 0 !important; margin-right: 0 !important; text-align: left !important; padding-left: 60px; }
+            .milestone-dot { left: 13px !important; }
+            .video-metadata { flex-direction: column; gap: 10px; align-items: center; text-align: center; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="blueprint-bg"></div>
+    <div class="industrial-overlay" style="z-index: 1;"></div>
+
+    <!-- Header / Navigation (Synchronized) -->
+    <header>
+        <div class="container nav-container">
+            <nav style="position: relative; z-index: 10;">
+                <div class="logo-container">
+                    <a href="index.html" class="logo"><img src="assets/logo.png" alt="CNZ Bearings Logo"
+                            style="height: 45px;"></a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html"><i data-lucide="home"></i>Home</a></li>
+                    <li><a href="about.html" class="active"><i data-lucide="info"></i>About Us</a></li>
+                    <li class="has-dropdown">
+                        <a href="index.html#industries"><i data-lucide="factory"></i>Industries</a>
+                        <div class="dropdown-menu">
+                            <a href="industry-industrial.html" class="dropdown-item"><i data-lucide="anvil"></i><span>Heavy Industrial</span></a>
+                            <a href="industry-process.html" class="dropdown-item"><i data-lucide="flask-conical"></i><span>Process & Sciences</span></a>
+                            <a href="industry-infrastructure.html" class="dropdown-item"><i data-lucide="landmark"></i><span>Energy & Infrastructure</span></a>
+                        </div>
+                    </li>
+                    <li class="has-dropdown">
+                        <a href="index.html#products"><i data-lucide="component"></i>Products</a>
+                        <div class="dropdown-menu">
+                            <a href="product-ucp.html" class="dropdown-item"><i data-lucide="box"></i><span>UCP Series</span></a>
+                            <a href="product-ucf.html" class="dropdown-item"><i data-lucide="layers"></i><span>UCF Series</span></a>
+                            <a href="product-ucfl.html" class="dropdown-item"><i data-lucide="circle"></i><span>UCFL Series</span></a>
+                            <a href="product-ucfc.html" class="dropdown-item"><i data-lucide="disc"></i><span>UCFC Series</span></a>
+                            <a href="product-uct.html" class="dropdown-item"><i data-lucide="move-horizontal"></i><span>UCT Series</span></a>
+                        </div>
+                    </li>
+                    <li class="has-dropdown">
+                        <a href="news.html"><i data-lucide="megaphone"></i>News</a>
+                        <div class="dropdown-menu">
+                            <a href="news-events.html" class="dropdown-item"><i data-lucide="calendar"></i><span>Events</span></a>
+                            <a href="news-newsletters.html" class="dropdown-item"><i data-lucide="mail"></i><span>Newsletters</span></a>
+                            <a href="news-blogs.html" class="dropdown-item"><i data-lucide="layout-list"></i><span>Blogs & Articles</span></a>
+                        </div>
+                    </li>
+                    <li><a href="news-newsletters.html"><i data-lucide="download"></i>Downloads</a></li>
+                    <li><a href="contact.html"><i data-lucide="phone"></i>Contact Us</a></li>
+                    <li><a href="contact.html" class="btn btn-primary"
+                            style="padding: 10px 20px; font-size: 12px; margin-top: 5px;">Get Quote</a></li>
+                </ul>
+                <div class="menu-toggle">
+                    <i data-lucide="menu"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Typographic Hero -->
+    <section class="hero-typographic">
+        <div class="hero-typographic-content">
+            <div class="protocol-header">SYSTEM ARCHITECTURE // EST. 1980</div>
+            <h1 style="font-size: clamp(3rem, 10vw, 7rem); color: #fff; line-height: 0.9; font-weight: 900; margin-bottom: 40px;">
+                ENGINEERING <span class="blue">PRECISION.</span><br>POWERING PERFORMANCE.
+            </h1>
+            <p style="color: var(--text-muted); font-size: 1.3rem; line-height: 1.8; max-width: 800px; margin: 0 auto 60px;">
+                Engineering durability isn't just about the physical component—it's about the technical integrity of the entire system.
+            </p>
+            <div style="display: flex; justify-content: center; gap: 60px;">
+                <div class="stat-col" style="text-align: center;">
+                    <span style="display: block; font-size: 3rem; font-weight: 900; color: #fff;">44+</span>
+                    <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 3px; color: var(--primary);">Years Heritage</span>
+                </div>
+                <div class="stat-col" style="text-align: center;">
+                    <span style="display: block; font-size: 3rem; font-weight: 900; color: #fff;">ISO</span>
+                    <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 3px; color: var(--primary);">QC Protocol</span>
+                </div>
+                <div class="stat-col" style="text-align: center;">
+                    <span style="display: block; font-size: 3rem; font-weight: 900; color: #fff;">40+</span>
+                    <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 3px; color: var(--primary);">Global Nodes</span>
+                </div>
+            </div>
+        </div>
+        <div class="cursor-spotlight"></div>
+    </section>
+
+    <!-- Mission Architecture -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title" style="text-align: center; margin-bottom: 80px;">
+                <span class="section-tag">MISSION ARCHITECTURE // CORE ALIGNMENT</span>
+                <h2 style="color: #fff;">Operational <span class="blue">Philosophy</span></h2>
+            </div>
+
+            <div class="mission-architecture">
+                <div class="architecture-axis"></div>
+
+                <!-- Card 01: Integrity -->
+                <div class="arch-card-wrapper left">
+                    <div class="narrative-card">
+                        <div class="card-bracket bracket-tl"></div>
+                        <div class="card-bracket bracket-tr"></div>
+                        <div class="card-bracket bracket-bl"></div>
+                        <div class="card-bracket bracket-br"></div>
+                        <div class="scan-line"></div>
+                        <span class="narrative-id-tag">[LOG: 01.STABILITY]</span>
+                        <h2 style="font-size: 2.2rem; color: #fff; font-weight: 900; margin-bottom: 25px;"><i data-lucide="shield-half"></i>Engineered <span class="blue">Integrity</span></h2>
+                        <p style="color: var(--text-muted); font-size: 1.15rem; line-height: 1.8;">
+                            Our core directive is the elimination of mechanical failure. Every pillow block bearing we produce undergoes rigorous metallurgical stress-analysis to ensure lifetime performance.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 02: Synergy -->
+                <div class="arch-card-wrapper right">
+                    <div class="narrative-card">
+                        <div class="card-bracket bracket-tl"></div>
+                        <div class="card-bracket bracket-tr"></div>
+                        <div class="card-bracket bracket-bl"></div>
+                        <div class="card-bracket bracket-br"></div>
+                        <div class="scan-line"></div>
+                        <span class="narrative-id-tag">[LOG: 02.LOGISTICS]</span>
+                        <h2 style="font-size: 2.2rem; color: #fff; font-weight: 900; margin-bottom: 25px;"><i data-lucide="network"></i>Global <span class="blue">Synergy</span></h2>
+                        <p style="color: var(--text-muted); font-size: 1.15rem; line-height: 1.8;">
+                            Connecting the world's most demanding machines. With strategic distribution nodes in 40+ countries, CNZ ensures components are always within reach.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 03: Trajectory -->
+                <div class="arch-card-wrapper left">
+                    <div class="narrative-card">
+                        <div class="card-bracket bracket-tl"></div>
+                        <div class="card-bracket bracket-tr"></div>
+                        <div class="card-bracket bracket-bl"></div>
+                        <div class="card-bracket bracket-br"></div>
+                        <div class="scan-line"></div>
+                        <span class="narrative-id-tag">[LOG: VISION.01]</span>
+                        <h2 style="font-size: 2.2rem; color: #fff; font-weight: 900; margin-bottom: 25px;"><i data-lucide="target"></i>VISION // <span class="blue">Global Trajectory</span></h2>
+                        <p style="color: var(--text-muted); font-size: 1.15rem; line-height: 1.8;">
+                            To become a globally trusted bearing brand, built on consistency, engineering reliability, and a strong digital presence.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 04: Directive -->
+                <div class="arch-card-wrapper right">
+                    <div class="narrative-card">
+                        <div class="card-bracket bracket-tl"></div>
+                        <div class="card-bracket bracket-tr"></div>
+                        <div class="card-bracket bracket-bl"></div>
+                        <div class="card-bracket bracket-br"></div>
+                        <div class="scan-line"></div>
+                        <span class="narrative-id-tag">[LOG: MISSION.01]</span>
+                        <h2 style="font-size: 2.2rem; color: #fff; font-weight: 900; margin-bottom: 25px;"><i data-lucide="compass"></i>MISSION // <span class="blue">Industrial Directive</span></h2>
+                        <p style="color: var(--text-muted); font-size: 1.15rem; line-height: 1.8;">
+                            To deliver dependable bearing solutions through quality-focused processes, strong supply systems, and customer-first service.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Quality Management Protocol -->
+    <section class="section" style="padding-top: 0; position: relative; z-index: 2;">
+        <div class="container">
+            <div class="section-title" style="text-align: center; margin-bottom: 60px;">
+                <span class="section-tag">COMPLIANCE HUB // ISO 9001:2015</span>
+                <h2 style="color: #fff;">Quality Management <span class="blue">Protocol</span></h2>
+            </div>
+            
+            <div class="certification-grid">
+                <div class="hud-corner-line tl"></div>
+                <div class="hud-corner-line tr"></div>
+                <div class="hud-corner-line bl"></div>
+                <div class="hud-corner-line br"></div>
+
+                <div class="cert-display-frame">
+                    <img src="assets/iso_certificate.jpg" alt="ISO 9001:2015 Certificate - CNZ Bearings">
+                    <div class="hud-corner-line tl"></div>
+                    <div class="hud-corner-line tr"></div>
+                    <div class="hud-corner-line bl"></div>
+                    <div class="hud-corner-line br"></div>
+                </div>
+
+                <div class="technical-dossier">
+                    <div class="dossier-item">
+                        <span class="dossier-label">STANDARD_PROTOCOL</span>
+                        <span class="dossier-value">ISO 9001:2015</span>
+                    </div>
+                    <div class="dossier-item">
+                        <span class="dossier-label">CERTIFICATE_NO</span>
+                        <span class="dossier-value">IRQS/220100394</span>
+                    </div>
+                    <div class="dossier-item">
+                        <span class="dossier-label">ACCREDITATION_BODY</span>
+                        <span class="dossier-value">NABCB / IRQS</span>
+                    </div>
+                    <div class="dossier-item">
+                        <span class="dossier-label">SCOPE_DESCRIPTION</span>
+                        <span class="dossier-value" style="font-size: 11px;">MANUFACTURING & SALE OF BALL & ROLLER BEARING</span>
+                    </div>
+                    <div class="dossier-item">
+                        <span class="dossier-label">INITIAL_GRANT_DATE</span>
+                        <span class="dossier-value">13/04/2022</span>
+                    </div>
+                    <div class="dossier-item">
+                        <span class="dossier-label">EXPIRY_VECTOR</span>
+                        <span class="dossier-value" style="color: var(--primary);">12/04/2025</span>
+                    </div>
+                    
+                    <div style="margin-top: 30px;">
+                        <span class="protocol-header" style="letter-spacing: 2px; font-size: 9px;">STATUS: VERIFIED // OPERATIONAL</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Timeline -->
+    <section class="section" style="background: rgba(255,255,255,0.01);">
+        <div class="container">
+            <div class="section-title" style="text-align: center; margin-bottom: 100px;">
+                <span class="section-tag">ENGINEERING TRACK</span>
+                <h2 style="color: #fff;">Legacy <span class="blue">System</span></h2>
+            </div>
+
+            <div class="blueprint-timeline">
+                <div class="timeline-vertical-pipe"></div>
+                
+                <div class="milestone-item left">
+                    <div class="milestone-dot"></div>
+                    <span class="milestone-year">1980</span>
+                    <h4 style="color: var(--primary); font-weight: 900; margin: 15px 0;">FOUNDATION</h4>
+                    <p style="color: var(--text-muted); line-height: 1.7;"><strong>Built on Precision & Trust.</strong> CNZ Bearings began with a simple goal—deliver dependable bearing solutions that industries can rely on.</p>
+                </div>
+
+                <div class="milestone-item right">
+                    <div class="milestone-dot"></div>
+                    <span class="milestone-year">1995</span>
+                    <h4 style="color: var(--primary); font-weight: 900; margin: 15px 0;">EXPANSION</h4>
+                    <p style="color: var(--text-muted); line-height: 1.7;"><strong>Growing with Industry.</strong> Expanded distribution and strengthened presence across multiple industrial sectors.</p>
+                </div>
+
+                <div class="milestone-item left">
+                    <div class="milestone-dot"></div>
+                    <span class="milestone-year">2010</span>
+                    <h4 style="color: var(--primary); font-weight: 900; margin: 15px 0;">OPERATIONAL STRENGTH</h4>
+                    <p style="color: var(--text-muted); line-height: 1.7;"><strong>Consistency at Scale.</strong> Improved processes, quality control, and inventory systems to ensure reliable performance.</p>
+                </div>
+
+                <div class="milestone-item right">
+                    <div class="milestone-dot"></div>
+                    <span class="milestone-year">2013</span>
+                    <h4 style="color: var(--primary); font-weight: 900; margin: 15px 0;">STRUCTURED GROWTH</h4>
+                    <p style="color: var(--text-muted); line-height: 1.7;"><strong>Building a Stronger Foundation.</strong> Refined internal systems and aligned operations for long-term, scalable growth.</p>
+                </div>
+
+                <div class="milestone-item left">
+                    <div class="milestone-dot"></div>
+                    <span class="milestone-year">2020</span>
+                    <h4 style="color: var(--primary); font-weight: 900; margin: 15px 0;">RESILIENCE</h4>
+                    <p style="color: var(--text-muted); line-height: 1.7;"><strong>Standing Strong When It Matters.</strong> Maintained supply and customer trust during global disruptions.</p>
+                </div>
+
+                <div class="milestone-item right">
+                    <div class="milestone-dot"></div>
+                    <span class="milestone-year">2026</span>
+                    <h4 style="color: var(--primary); font-weight: 900; margin: 15px 0;">DIGITAL ERA BEGINS</h4>
+                    <p style="color: var(--text-muted); line-height: 1.7;"><strong>Entering the Digital Future.</strong> Launching global digital presence through e-commerce, branding, and content-driven growth.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership Badges -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title">
+                <span class="section-tag">COMMAND HIERARCHY</span>
+                <h2 style="color: #fff;">Engineering <span class="blue">Vision</span></h2>
+            </div>
+
+            <div class="leader-id-grid">
+                <div class="id-badge">
+                    <div class="badge-photo"><img src="assets/director_bharat.png" alt="Bharat Mehta"></div>
+                    <div class="badge-info">
+                        <h4>Bharat Mehta</h4>
+                        <span>Director</span>
+                    </div>
+                </div>
+                <div class="id-badge">
+                    <div class="badge-photo"><img src="assets/director_prakash.png" alt="Prakash Mehta"></div>
+                    <div class="badge-info">
+                        <h4>Prakash Mehta</h4>
+                        <span>Director</span>
+                    </div>
+                </div>
+                <div class="id-badge">
+                    <div class="badge-photo"><img src="assets/director_anand.png" alt="Anand Mehta"></div>
+                    <div class="badge-info">
+                        <h4>Anand Mehta</h4>
+                        <span>Director</span>
+                    </div>
+                </div>
+                <div class="id-badge">
+                    <div class="badge-photo"><img src="assets/director_baiju.png" alt="Baiju Mehta"></div>
+                    <div class="badge-info">
+                        <h4>Baiju Mehta</h4>
+                        <span>Director</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="caution-bar"></div>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <img src="assets/logo.png" alt="CNZ Bearings Logo" style="height: 60px; margin-bottom: 20px;">
+                    <p>Precision manufacturing since 1980. High-performance technical components for global industrial leaders.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="index.html#products">Products</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i data-lucide="phone" size="18"></i> +91 8511153657</li>
+                        <li><i data-lucide="mail" size="18"></i> pillowblock@cnzbearings.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CNZ Bearings. ISO 9001 CERTIFIED.</p>
+            </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Industrial Product Hub (Fixed Global) -->
+    <div class="product-hub-wrapper" id="hubWrapper">
+        <div class="product-hub-subs">
+            <a href="product-ucp.html" class="hub-sub" style="--i:0;">
+                <i data-lucide="box"></i>
+                <span class="hub-sub-label">UCP</span>
+            </a>
+            <a href="product-ucf.html" class="hub-sub" style="--i:1;">
+                <i data-lucide="layers"></i>
+                <span class="hub-sub-label">UCF</span>
+            </a>
+            <a href="product-ucfl.html" class="hub-sub" style="--i:2;">
+                <i data-lucide="circle"></i>
+                <span class="hub-sub-label">UCFL</span>
+            </a>
+            <a href="product-ucfc.html" class="hub-sub" style="--i:3;">
+                <i data-lucide="disc"></i>
+                <span class="hub-sub-label">UCFC</span>
+            </a>
+            <a href="product-uct.html" class="hub-sub" style="--i:4;">
+                <i data-lucide="move-horizontal"></i>
+                <span class="hub-sub-label">UCT</span>
+            </a>
+        </div>
+        <div class="product-hub-float" id="hubTrigger" aria-label="Open Product Navigator">
+            <div class="hub-center-content">
+                <i data-lucide="package"></i>
+                <span class="hub-main-label">PRODUCT</span>
+            </div>
+            <div class="hub-pulse"></div>
+        </div>
+    </div>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/918511153657" class="whatsapp-float" target="_blank" aria-label="Contact on WhatsApp">
+        <i data-lucide="message-circle"></i>
+        <div class="wa-tooltip">Direct Support</div>
+        <div class="wa-pulse"></div>
+    </a>
+
+    <script src="main.js"></script>
+    <script>
+        lucide.createIcons();
+
+        // Industrial Hub Interaction
+        const hubTrigger = document.getElementById('hubTrigger');
+        const hubWrapper = document.getElementById('hubWrapper');
+
+        if (hubTrigger && hubWrapper) {
+            hubTrigger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                hubWrapper.classList.toggle('active');
+            });
+
+            // Close when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!hubWrapper.contains(e.target)) {
+                    hubWrapper.classList.remove('active');
+                }
+            });
+        }
+
+        // About Us Hero Technical Spotlight Logic
+        const heroSection = document.querySelector('.hero-typographic');
+        if (heroSection) {
+            heroSection.addEventListener('mousemove', (e) => {
+                const rect = heroSection.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                heroSection.style.setProperty('--mouse-x', `${x}px`);
+                heroSection.style.setProperty('--mouse-y', `${y}px`);
+            });
+        }
+    </script>
+</body>
+
+</html>

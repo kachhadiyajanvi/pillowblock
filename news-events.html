@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Engagement Nodes | CNZ Bearings - Exhibition Protocol</title>
+    <meta name="description"
+        content="Exploring the chronological journey of CNZ industrial innovation. Join us at major exhibitions worldwide to experience precision engineering firsthand.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --blueprint-line: rgba(255, 255, 255, 0.07);
+        }
+
+        body {
+            background-color: #06080c;
+            overflow-x: hidden;
+        }
+
+        /* Blueprint Grid Overlay */
+        .blueprint-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--blueprint-line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--blueprint-line) 1px, transparent 1px);
+            background-size: 80px 80px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.8;
+        }
+
+        /* Tactical Split Hero */
+        .engagement-hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            min-height: 100vh;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-left {
+            padding: 150px 80px 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background: linear-gradient(90deg, #06080c 80%, transparent);
+        }
+
+        .hero-right {
+            position: relative;
+            background-image: url('events_hero_cinematic_1775891222102.png');
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+        }
+
+        .hero-right::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(0, 163, 255, 0.1), 
+                rgba(0, 163, 255, 0.4), 
+                rgba(0, 163, 255, 0.1), 
+                transparent);
+            animation: scanLine 8s linear infinite;
+        }
+
+        @keyframes scanLine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Engagement Timeline */
+        .technical-timeline {
+            position: relative;
+            padding: 120px 0;
+            z-index: 2;
+        }
+
+        .timeline-axis {
+            position: absolute;
+            left: 40px;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, var(--primary), var(--primary), transparent);
+            box-shadow: 0 0 15px var(--primary);
+        }
+
+        .engagement-node {
+            position: relative;
+            margin-bottom: 150px;
+            padding-left: 100px;
+        }
+
+        .node-marker {
+            position: absolute;
+            left: 33px;
+            top: 10px;
+            width: 16px;
+            height: 16px;
+            background: var(--primary);
+            border: 3px solid var(--secondary);
+            border-radius: 50%;
+            box-shadow: var(--glow-primary);
+            z-index: 3;
+        }
+
+        .engagement-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            max-width: 1000px;
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+            backdrop-filter: blur(10px);
+            cursor: default;
+        }
+
+        .engagement-card:hover {
+            transform: translateX(15px) scale(1.02);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: var(--primary);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), var(--glow-primary);
+        }
+
+        /* Tactical Slider */
+        .card-slider {
+            position: relative;
+            height: 100%;
+            min-height: 480px;
+            background: #000;
+            overflow: hidden;
+            border-right: 1px solid var(--border);
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out, transform 8s ease-out;
+            transform: scale(1.1);
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .slide-overlay-label {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 163, 255, 0.2);
+            backdrop-filter: blur(5px);
+            padding: 5px 12px;
+            border: 1px solid rgba(0, 163, 255, 0.4);
+            color: var(--primary);
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            z-index: 5;
+            text-transform: uppercase;
+        }
+
+        .slide-progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            background: var(--primary);
+            width: 0%;
+            z-index: 10;
+        }
+
+        .card-content {
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .node-id-tag {
+            font-size: 11px;
+            font-weight: 900;
+            color: var(--primary);
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .node-title {
+            font-size: 2.8rem;
+            color: #fff;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 25px;
+        }
+
+        .node-meta {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 20px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .meta-item i {
+            color: var(--primary);
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 1024px) {
+            .engagement-hero { grid-template-columns: 1fr; }
+            .hero-right { height: 400px; }
+            .engagement-card { grid-template-columns: 1fr; }
+            .card-slider { height: 400px; }
+        }
+
+        @media (max-width: 768px) {
+            .hero-left { padding: 120px 40px 60px; }
+            .timeline-axis { left: 20px; }
+            .engagement-node { padding-left: 60px; }
+            .node-marker { left: 13px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="blueprint-bg"></div>
+    <div class="industrial-overlay" style="z-index: 1;"></div>
+
+    <!-- Header / Navigation -->
+    <header>
+        <div class="container nav-container">
+            <nav style="position: relative; z-index: 10;">
+                <div class="logo-container">
+                    <a href="index.html" class="logo"><img src="assets/logo.png" alt="CNZ Bearings Logo"
+                            style="height: 45px;"></a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html"><i data-lucide="home"></i>Home</a></li>
+                    <li><a href="about.html"><i data-lucide="info"></i>About Us</a></li>
+                    <li class="has-dropdown">
+                        <a href="index.html#industries"><i data-lucide="factory"></i>Industries</a>
+                        <div class="dropdown-menu">
+                            <a href="industry-industrial.html" class="dropdown-item"><i data-lucide="anvil"></i><span>Heavy Industrial</span></a>
+                            <a href="industry-process.html" class="dropdown-item"><i data-lucide="flask-conical"></i><span>Process & Sciences</span></a>
+                            <a href="industry-infrastructure.html" class="dropdown-item"><i data-lucide="landmark"></i><span>Energy & Infrastructure</span></a>
+                        </div>
+                    </li>
+                    <li class="has-dropdown">
+                        <a href="index.html#products"><i data-lucide="component"></i>Products</a>
+                        <div class="dropdown-menu">
+                            <a href="product-ucp.html" class="dropdown-item"><i data-lucide="box"></i><span>UCP Series</span></a>
+                            <a href="product-ucf.html" class="dropdown-item"><i data-lucide="layers"></i><span>UCF Series</span></a>
+                            <a href="product-ucfl.html" class="dropdown-item"><i data-lucide="circle"></i><span>UCFL Series</span></a>
+                            <a href="product-ucfc.html" class="dropdown-item"><i data-lucide="disc"></i><span>UCFC Series</span></a>
+                            <a href="product-uct.html" class="dropdown-item"><i data-lucide="move-horizontal"></i><span>UCT Series</span></a>
+                        </div>
+                    </li>
+                    <li class="has-dropdown">
+                        <a href="news.html" class="active"><i data-lucide="megaphone"></i>News</a>
+                        <div class="dropdown-menu">
+                            <a href="news-events.html" class="dropdown-item"><i data-lucide="calendar"></i><span>Events</span></a>
+                            <a href="news-newsletters.html" class="dropdown-item"><i data-lucide="mail"></i><span>Newsletters</span></a>
+                            <a href="news-blogs.html" class="dropdown-item"><i data-lucide="layout-list"></i><span>Blogs & Articles</span></a>
+                        </div>
+                    </li>
+                    <li><a href="news-newsletters.html"><i data-lucide="download"></i>Downloads</a></li>
+                    <li><a href="contact.html"><i data-lucide="phone"></i>Contact Us</a></li>
+                </ul>
+                <div class="menu-toggle">
+                    <i data-lucide="menu"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Split Hero -->
+    <section class="engagement-hero">
+        <div class="hero-left">
+            <a href="news.html" style="color: var(--primary); display: flex; align-items: center; gap: 10px; margin-bottom: 30px; font-weight: 900; font-size: 11px; text-transform: uppercase; letter-spacing: 2px;">
+                <i data-lucide="terminal" size="16"></i> CD .. / NEWS_HUB
+            </a>
+            <div class="protocol-header" style="font-size: 11px; font-weight: 900; letter-spacing: 5px; color: var(--primary); margin-bottom: 20px; text-transform: uppercase;">EXHIBITION PROTOCOL // NODE.073</div>
+            <h1 style="font-size: clamp(3rem, 10vw, 5rem); color: #fff; line-height: 0.9; font-weight: 900; margin-bottom: 35px;">
+                GLOBAL <span class="blue">ENGAGEMENT.</span><br>LOCAL PRECISION.
+            </h1>
+            <p style="color: var(--text-muted); font-size: 1.25rem; line-height: 1.7; max-width: 600px; margin-bottom: 50px;">
+                Connecting the chronological journey of CNZ industrial innovation. We deploy our technical expertise across major global exhibitions to showcase the future of high-performance engineering.
+            </p>
+            <div style="display: flex; gap: 40px;">
+                <div>
+                    <span style="display: block; font-size: 2.5rem; font-weight: 900; color: #fff;">15+</span>
+                    <span style="font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--primary);">Annual Events</span>
+                </div>
+                <div>
+                    <span style="display: block; font-size: 2.5rem; font-weight: 900; color: #fff;">12</span>
+                    <span style="font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--primary);">Global Cities</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-right"></div>
+    </section>
+
+    <!-- Technical Engagement Timeline -->
+    <section class="technical-timeline">
+        <div class="container">
+            <div class="timeline-axis"></div>
+
+            <!-- NODE: EXCON 2025 -->
+            <div class="engagement-node">
+                <div class="node-marker"></div>
+                <div class="engagement-card">
+                    <div class="card-slider" id="exconSlider">
+                        <div class="slide-overlay-label" id="slideStatus">PROTOCOL: OFFICIAL POSTER</div>
+                        <div class="slide active" style="background-image: url('excon_2025_poster_official.jpg');"></div>
+                        <div class="slide" style="background-image: url('excon_booth_1.jpg');"></div>
+                        <div class="slide" style="background-image: url('excon_booth_2.jpg');"></div>
+                        <div class="slide" style="background-image: url('excon_booth_3.jpg');"></div>
+                        <div class="slide" style="background-image: url('excon_booth_4.jpg');"></div>
+                        <div class="slide-progress-bar" id="slideProgress"></div>
+                    </div>
+                    <div class="card-content">
+                        <span class="node-id-tag">[ENGAGEMENT: EX.NODE.BENGALURU]</span>
+                        <h2 class="node-title">EXCON <span class="blue">2025</span></h2>
+                        <div class="node-meta">
+                            <span class="meta-item"><i data-lucide="calendar"></i> 9-13 DEC 2025</span>
+                            <span class="meta-item"><i data-lucide="map-pin"></i> BIEC, BENGALURU</span>
+                        </div>
+                        <div style="background: rgba(0, 163, 255, 0.05); padding: 15px; border-left: 3px solid var(--primary); margin-bottom: 25px;">
+                            <span style="display: block; font-size: 10px; font-weight: 900; color: var(--primary); margin-bottom: 5px;">LOCATION DATA:</span>
+                            <p style="color: #fff; font-size: 14px; font-weight: 700; margin: 0;">HALL: 3 | STALLS: A-31 & B-109</p>
+                        </div>
+                        <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 30px;">
+                            Experience advanced engineering solutions purpose-built for construction and heavy industrial applications. Discover our high-speed, high-load, precision-engineered bearing units.
+                        </p>
+                        <a href="contact.html" class="btn btn-primary" style="align-self: flex-start; padding: 12px 30px;">Request Notification</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NODE: ENGIMACH -->
+            <div class="engagement-node">
+                <div class="node-marker"></div>
+                <div class="engagement-card">
+                    <div class="card-poster" style="background-image: url('engimach_tactical_1775891274114.png'); background-size: cover; height: 100%; min-height: 480px; border-right: 1px solid var(--border);"></div>
+                    <div class="card-content">
+                        <span class="node-id-tag">[ENGAGEMENT: EX.NODE.GUJARAT]</span>
+                        <h2 class="node-title">ENGIMACH <span class="blue">XVI</span></h2>
+                        <div class="node-meta">
+                            <span class="meta-item"><i data-lucide="calendar"></i> DEC 2023</span>
+                            <span class="meta-item"><i data-lucide="map-pin"></i> EXHIBITION CENTRE, INDIA</span>
+                        </div>
+                        <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 30px;">
+                            Showcasing precision machine tool bearings and autonomous industrial integration systems. A major hub for Indian manufacturing excellence and precision engineering discourse.
+                        </p>
+                        <span style="color: var(--primary); font-weight: 800; font-size: 11px; letter-spacing: 2px;">PROTOCOL: CONCLUDED // ARCHIVE AVAILABLE</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="caution-bar"></div>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <img src="assets/logo.png" alt="CNZ Bearings Logo" style="height: 60px; margin-bottom: 20px;">
+                    <p style="color: var(--text-muted);">Precision manufacturing since 1980. High-performance technical components for global industrial leaders.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="news.html">News Hub</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i data-lucide="phone" size="18"></i> +91 8511153657</li>
+                        <li><i data-lucide="mail" size="18"></i> pillowblock@cnzbearings.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CNZ Bearings. ISO 9001 CERTIFIED.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Industrial Product Hub (Fixed Global) -->
+    <div class="product-hub-wrapper" id="hubWrapper">
+        <div class="product-hub-subs">
+            <a href="product-ucp.html" class="hub-sub" style="--i:0;">
+                <i data-lucide="box"></i>
+                <span class="hub-sub-label">UCP</span>
+            </a>
+            <a href="product-ucf.html" class="hub-sub" style="--i:1;">
+                <i data-lucide="layers"></i>
+                <span class="hub-sub-label">UCF</span>
+            </a>
+            <a href="product-ucfl.html" class="hub-sub" style="--i:2;">
+                <i data-lucide="circle"></i>
+                <span class="hub-sub-label">UCFL</span>
+            </a>
+            <a href="product-ucfc.html" class="hub-sub" style="--i:3;">
+                <i data-lucide="disc"></i>
+                <span class="hub-sub-label">UCFC</span>
+            </a>
+            <a href="product-uct.html" class="hub-sub" style="--i:4;">
+                <i data-lucide="move-horizontal"></i>
+                <span class="hub-sub-label">UCT</span>
+            </a>
+        </div>
+        <div class="product-hub-float" id="hubTrigger" aria-label="Open Product Navigator">
+            <div class="hub-center-content">
+                <i data-lucide="package"></i>
+                <span class="hub-main-label">PRODUCT</span>
+            </div>
+            <div class="hub-pulse"></div>
+        </div>
+    </div>
+
+    <!-- WhatsApp Floating Button (Repositioned to Left) -->
+    <a href="https://wa.me/918511153657" class="whatsapp-float" style="left: 40px !important; right: auto !important;" target="_blank" aria-label="Contact on WhatsApp">
+        <i data-lucide="message-circle"></i>
+        <div class="wa-tooltip">Direct Support</div>
+        <div class="wa-pulse"></div>
+    </a>
+
+    <script src="main.js"></script>
+    <script>
+        lucide.createIcons();
+
+        // Industrial Hub Interaction
+        const hubTrigger = document.getElementById('hubTrigger');
+        const hubWrapper = document.getElementById('hubWrapper');
+
+        if (hubTrigger && hubWrapper) {
+            hubTrigger.addEventListener('click', (e) => {
+                e.stopPropagation();
+                hubWrapper.classList.toggle('active');
+            });
+
+            // Close when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!hubWrapper.contains(e.target)) {
+                    hubWrapper.classList.remove('active');
+                }
+            });
+        }
+
+        // --- TACTICAL SLIDER LOGIC ---
+        function initSlider() {
+            const slides = document.querySelectorAll('#exconSlider .slide');
+            const statusLabel = document.getElementById('slideStatus');
+            const progressBar = document.getElementById('slideProgress');
+            let currentIndex = 0;
+            const intervalTime = 4000;
+
+            const labels = [
+                "PROTOCOL: OFFICIAL POSTER",
+                "LIVE FEED: BOOTH OVERVIEW [01]",
+                "LIVE FEED: TECHNICAL HUB [02]",
+                "LIVE FEED: BOOTH DETAIL [03]",
+                "LIVE FEED: ON-SITE TEAM [04]"
+            ];
+
+            function nextSlide() {
+                // Update Progress Bar
+                progressBar.style.transition = 'none';
+                progressBar.style.width = '0%';
+                
+                setTimeout(() => {
+                    progressBar.style.transition = `width ${intervalTime}ms linear`;
+                    progressBar.style.width = '100%';
+                }, 10);
+
+                slides[currentIndex].classList.remove('active');
+                currentIndex = (currentIndex + 1) % slides.length;
+                slides[currentIndex].classList.add('active');
+                
+                // Update Label
+                statusLabel.innerText = labels[currentIndex];
+            }
+
+            // Start Bar for first slide
+            progressBar.style.transition = `width ${intervalTime}ms linear`;
+            progressBar.style.width = '100%';
+
+            setInterval(nextSlide, intervalTime);
+        }
+
+        document.addEventListener('DOMContentLoaded', initSlider);
+    </script>
+</body>
+
+</html>

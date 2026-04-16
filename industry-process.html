@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Process & Sciences | CNZ Bearings</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .ind-hero {
+            height: 60vh;
+            background: linear-gradient(rgba(10, 13, 18, 0.7), rgba(10, 13, 18, 0.9)), url('assets/ind_pharma_user.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid rgba(0, 209, 255, 0.2);
+        }
+        .ind-summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: -80px;
+            position: relative;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav-container">
+            <nav>
+                <div class="logo-container">
+                    <a href="index.html" class="logo"><img src="assets/logo.png" alt="CNZ Bearings Logo" style="height: 45px;"></a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html"><i data-lucide="home"></i>Home</a></li>
+                    <li><a href="about.html"><i data-lucide="info"></i>About Us</a></li>
+                    <li class="has-dropdown">
+                        <a href="index.html#industries" class="active"><i data-lucide="factory"></i>Industries</a>
+                        <div class="dropdown-menu">
+                            <a href="industry-industrial.html" class="dropdown-item">
+                                <i data-lucide="anvil"></i>
+                                <span>Heavy Industrial</span>
+                            </a>
+                            <a href="industry-process.html" class="dropdown-item">
+                                <i data-lucide="flask-conical"></i>
+                                <span>Process & Sciences</span>
+                            </a>
+                            <a href="industry-infrastructure.html" class="dropdown-item">
+                                <i data-lucide="landmark"></i>
+                                <span>Energy & Infrastructure</span>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="has-dropdown">
+                        <a href="index.html#products"><i data-lucide="component"></i>Products</a>
+                        <div class="dropdown-menu">
+                            <a href="product-ucp.html" class="dropdown-item">
+                                <i data-lucide="box"></i>
+                                <span>UCP Series</span>
+                            </a>
+                            <a href="product-ucf.html" class="dropdown-item">
+                                <i data-lucide="layers"></i>
+                                <span>UCF Series</span>
+                            </a>
+                            <a href="product-ucfl.html" class="dropdown-item">
+                                <i data-lucide="circle"></i>
+                                <span>UCFL Series</span>
+                            </a>
+                            <a href="product-ucfc.html" class="dropdown-item">
+                                <i data-lucide="disc"></i>
+                                <span>UCFC Series</span>
+                            </a>
+                            <a href="product-uct.html" class="dropdown-item">
+                                <i data-lucide="move-horizontal"></i>
+                                <span>UCT Series</span>
+                            </a>
+                        </div>
+                    </li>
+                    <li class="has-dropdown">
+                        <a href="news.html"><i data-lucide="megaphone"></i>News</a>
+                        <div class="dropdown-menu">
+                            <a href="news-events.html" class="dropdown-item"><i data-lucide="calendar"></i><span>Events</span></a>
+                            <a href="news-newsletters.html" class="dropdown-item"><i data-lucide="mail"></i><span>Newsletters</span></a>
+                            <a href="news-blogs.html" class="dropdown-item"><i data-lucide="layout-list"></i><span>Blogs & Articles</span></a>
+                        </div>
+                    </li>
+                    <li><a href="news-newsletters.html"><i data-lucide="download"></i>Downloads</a></li>
+                    <li><a href="contact.html"><i data-lucide="phone"></i>Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="ind-hero">
+        <div class="container">
+            <div class="section-tag">PRECISION FLOW</div>
+            <h1 style="color: white; font-size: 3.5rem;">Process & <span class="blue">Sciences</span></h1>
+            <p style="color: rgba(255,255,255,0.8); max-width: 600px; font-size: 1.1rem; margin-top: 20px;">Hygienic and chemical-resistant bearing solutions designed for strict regulatory compliance and ultra-clean operating environments.</p>
+        </div>
+    </section>
+
+    <section class="section industries-section" style="padding-top: 120px;">
+        <div class="container">
+            <div class="ind-summary-grid">
+                <!-- Food & Bev -->
+                <div class="ind-tile active" style="min-height: 400px; opacity: 1; transform: translateY(0);">
+                    
+                    <div class="ind-bg" style="background-image: url('assets/ind_food_user.jpg'); filter: brightness(0.6);"></div>
+                    <div class="ind-content">
+                        <div class="ind-icon"><i data-lucide="utensils"></i></div>
+                        <h4>Food & Beverage Processing</h4>
+                        <p style="font-size: 13px; color: rgba(255,255,255,0.7); margin-top: 15px;">Constructed with food-grade lubricants and specialized seals to withstand aggressive washdown procedures and corrosive cleaning agents.</p>
+                    </div>
+                </div>
+
+                <!-- Pharma -->
+                <div class="ind-tile active" style="min-height: 400px; opacity: 1; transform: translateY(0);">
+                    
+                    <div class="ind-bg" style="background-image: url('assets/ind_pharma_user.jpg'); filter: brightness(0.6);"></div>
+                    <div class="ind-content">
+                        <div class="ind-icon"><i data-lucide="pill"></i></div>
+                        <h4>Pharmaceutical & Healthcare</h4>
+                        <p style="font-size: 13px; color: rgba(255,255,255,0.7); margin-top: 15px;">Supporting cleanroom initiatives with maintenance-free designs that eliminate contamination risk in critical production zones.</p>
+                    </div>
+                </div>
+
+                <!-- Chemical -->
+                <div class="ind-tile active" style="min-height: 400px; opacity: 1; transform: translateY(0);">
+                    
+                    <div class="ind-bg" style="background-image: url('assets/ind_chem_user.jpg'); filter: brightness(0.6);"></div>
+                    <div class="ind-content">
+                        <div class="ind-icon"><i data-lucide="flask-conical"></i></div>
+                        <h4>Chemical & Process Industry</h4>
+                        <p style="font-size: 13px; color: rgba(255,255,255,0.7); margin-top: 15px;">Engineered to resist volatile chemical environments and maintain performance under fluctuating pressure and temperature conditions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Maintain your hygiene standards with CNZ</h2>
+            <p style="margin-bottom: 30px; color: rgba(255,255,255,0.8);">Request our compliance documentation and material certificates for your facility.</p>
+            <a href="contact.html" class="btn btn-primary">Request Compliance Sheets</a>
+        </div>
+    </section>
+
+    <!-- Footer (Synchronized) -->
+    <footer id="contact">
+        <div class="caution-bar"></div>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <img src="assets/logo.png" alt="CNZ Bearings Logo" style="height: 60px; margin-bottom: 20px;">
+                    <p>Precision manufacturing since 1980. High-performance pillow block bearings for global industrial leaders.</p>
+                    <div class="footer-socials">
+                        <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg></a>
+                        <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.42a2.78 2.78 0 0 0-1.94 2C1 8.11 1 12 1 12s0 3.89.46 5.58a2.78 2.78 0 0 0 1.94 2c1.72.42 8.6.42 8.6.42s6.88 0 8.6-.42a2.78 2.78 0 0 0 1.94-2C23 15.89 23 12 23 12s0-3.89-.46-5.58z"></path><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"></polygon></svg></a>
+                        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg></a>
+                        <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path></svg></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="news.html">News Hub</a></li>
+                        <li><a href="news-newsletters.html">Downloads</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Products</h4>
+                    <ul class="footer-links">
+                        <li><a href="product-ucp.html">UCP Series</a></li>
+                        <li><a href="product-ucf.html">UCF Series</a></li>
+                        <li><a href="product-ucfl.html">UCFL Series</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact Us</h4>
+                    <ul class="footer-contact">
+                        <li><i data-lucide="map-pin" size="18"></i> Aryan Corporate Park, Ahmedabad, Gujarat 380054</li>
+                        <li><i data-lucide="phone" size="18"></i> +91 8511153657</li>
+                        <li><i data-lucide="mail" size="18"></i> pillowblock@cnzbearings.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 CNZ Bearings. ISO 9001:2015 CERTIFIED.</p>
+                <div style="font-weight: 800; color: var(--primary);">PRECISION MANUFACTURING GROUP</div>
+            </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/918511153657" class="whatsapp-float" target="_blank" aria-label="Contact on WhatsApp">
+        <i data-lucide="message-circle"></i>
+        <div class="wa-tooltip">Direct Support</div>
+        <div class="wa-pulse"></div>
+    </a>
+
+    <script src="main.js"></script>
+    <script>lucide.createIcons();</script>
+</body>
+</html>
