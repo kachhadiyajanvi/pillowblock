@@ -298,7 +298,7 @@ function initMobileMenu() {
         // Close menu when clicking a link
         navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
-                if (!link.classList.contains('dropdown-item')) {
+                if (!link.classList.contains('dropdown-item') && !link.classList.contains('mega-item')) {
                     navLinks.classList.remove('active');
                     const icon = menuToggle.querySelector('i');
                     icon.setAttribute('data-lucide', 'menu');
@@ -309,8 +309,8 @@ function initMobileMenu() {
     }
 }
 
-// Ensure dropdowns work on mobile via click if needed
-document.querySelectorAll('.has-dropdown > a').forEach(dropdownMain => {
+// Ensure dropdowns and mega menu work on mobile via click if needed
+document.querySelectorAll('.has-dropdown > a, .has-mega > a').forEach(dropdownMain => {
     dropdownMain.addEventListener('click', (e) => {
         if (window.innerWidth <= 992) {
             e.preventDefault();

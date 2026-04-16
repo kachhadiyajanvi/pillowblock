@@ -10,7 +10,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&display=swap"
         rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -31,39 +31,73 @@
                             style="height: 45px;"></a>
                 </div>
                 <ul class="nav-links">
-                    <li><a href="index.html"><i data-lucide="home"></i>Home</a></li>
-                    <li><a href="about.html"><i data-lucide="info"></i>About Us</a></li>
-                    <li class="has-dropdown">
-                        <a href="index.html#industries"><i data-lucide="factory"></i>Industries</a>
-                        <div class="dropdown-menu">
-                            <a href="industry-industrial.html" class="dropdown-item"><i data-lucide="anvil"></i><span>Heavy Industrial</span></a>
-                            <a href="industry-process.html" class="dropdown-item"><i data-lucide="flask-conical"></i><span>Process & Sciences</span></a>
-                            <a href="industry-infrastructure.html" class="dropdown-item"><i data-lucide="landmark"></i><span>Energy & Infrastructure</span></a>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li class="has-mega">
+                        <a href="index.html#industries">Industries</a>
+                        <div class="mega-menu">
+                            <div class="container">
+                                <div class="mega-grid">
+                                    <div class="mega-col">
+                                        <div class="mega-title"><i data-lucide="factory"></i>Heavy Industrial</div>
+                                        <ul class="mega-list">
+                                            <li><a href="industry-industrial.html" class="mega-item"><i data-lucide="cog"></i>Manufacturing & Production</a></li>
+                                            <li><a href="industry-industrial.html" class="mega-item"><i data-lucide="pickaxe"></i>Mining & Heavy Industry</a></li>
+                                            <li><a href="industry-industrial.html" class="mega-item"><i data-lucide="building"></i>Construction & Infrastructure</a></li>
+                                            <li><a href="industry-industrial.html" class="mega-item"><i data-lucide="car"></i>Automotive & Transportation</a></li>
+                                            <li><a href="industry-industrial.html" class="mega-item"><i data-lucide="anvil"></i>Steel & Metal Processing</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="mega-col">
+                                        <div class="mega-title"><i data-lucide="flask-conical"></i>Process & Sciences</div>
+                                        <ul class="mega-list">
+                                            <li><a href="industry-process.html" class="mega-item"><i data-lucide="utensils"></i>Food & Beverage Processing</a></li>
+                                            <li><a href="industry-process.html" class="mega-item"><i data-lucide="pill"></i>Pharmaceutical & Healthcare</a></li>
+                                            <li><a href="industry-process.html" class="mega-item"><i data-lucide="beaker"></i>Chemical & Process Industry</a></li>
+                                            <li><a href="industry-process.html" class="mega-item"><i data-lucide="scroll"></i>Textile & Paper Industry</a></li>
+                                            <li><a href="industry-process.html" class="mega-item"><i data-lucide="recycle"></i>Recycling & Waste Management</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="mega-col">
+                                        <div class="mega-title"><i data-lucide="zap"></i>Energy & Infrastructure</div>
+                                        <ul class="mega-list">
+                                            <li><a href="industry-infrastructure.html" class="mega-item"><i data-lucide="tractor"></i>Agriculture & Farming</a></li>
+                                            <li><a href="industry-infrastructure.html" class="mega-item"><i data-lucide="fan"></i>HVAC & Ventilation</a></li>
+                                            <li><a href="industry-infrastructure.html" class="mega-item"><i data-lucide="truck"></i>Material Handling & Logistics</a></li>
+                                            <li><a href="industry-infrastructure.html" class="mega-item"><i data-lucide="sun"></i>Renewable Energy</a></li>
+                                            <li><a href="industry-infrastructure.html" class="mega-item"><i data-lucide="package"></i>Packaging & Printing</a></li>
+                                            <li><a href="industry-infrastructure.html" class="mega-item"><i data-lucide="ship"></i>Marine & Shipbuilding</a></li>
+                                            <li><a href="industry-infrastructure.html" class="mega-item"><i data-lucide="zap"></i>Power Generation Plants</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </li>
                     <li class="has-dropdown">
-                        <a href="index.html#products"><i data-lucide="component"></i>Products</a>
+                        <a href="index.html#products">Products</a>
                         <div class="dropdown-menu">
-                            <a href="product-ucp.html" class="dropdown-item"><i data-lucide="box"></i><span>UCP Series</span></a>
-                            <a href="product-ucf.html" class="dropdown-item"><i data-lucide="layers"></i><span>UCF Series</span></a>
-                            <a href="product-ucfl.html" class="dropdown-item"><i data-lucide="circle"></i><span>UCFL Series</span></a>
-                            <a href="product-ucfc.html" class="dropdown-item"><i data-lucide="disc"></i><span>UCFC Series</span></a>
-                            <a href="product-uct.html" class="dropdown-item"><i data-lucide="move-horizontal"></i><span>UCT Series</span></a>
+                            <a href="product-ucp.html" class="dropdown-item"><span>UCP Series</span></a>
+                            <a href="product-ucf.html" class="dropdown-item"><span>UCF Series</span></a>
+                            <a href="product-ucfl.html" class="dropdown-item"><span>UCFL Series</span></a>
+                            <a href="product-ucfc.html" class="dropdown-item"><span>UCFC Series</span></a>
+                            <a href="product-uct.html" class="dropdown-item"><span>UCT Series</span></a>
                         </div>
                     </li>
                     <li class="has-dropdown">
-                        <a href="news.html" class="active"><i data-lucide="megaphone"></i>News</a>
+                        <a href="news.html" class="active">News</a>
                         <div class="dropdown-menu">
-                            <a href="news-events.html" class="dropdown-item"><i data-lucide="calendar"></i><span>Events</span></a>
-                            <a href="news-newsletters.html" class="dropdown-item"><i data-lucide="mail"></i><span>Newsletters</span></a>
-                            <a href="news-blogs.html" class="dropdown-item"><i data-lucide="layout-list"></i><span>Blogs & Articles</span></a>
+                            <a href="news-events.html" class="dropdown-item"><span>Events</span></a>
+                            <a href="news-newsletters.html" class="dropdown-item"><span>Newsletters</span></a>
+                            <a href="news-blogs.html" class="dropdown-item"><span>Blogs & Articles</span></a>
                         </div>
                     </li>
-                    <li><a href="news-newsletters.html"><i data-lucide="download"></i>Downloads</a></li>
-                    <li><a href="contact.html"><i data-lucide="phone"></i>Contact Us</a></li>
-                    <li><a href="contact.html" class="btn btn-primary"
-                            style="padding: 10px 20px; font-size: 12px; margin-top: 5px;">Get Quote</a></li>
+                    <li><a href="news-newsletters.html">Downloads</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
                 </ul>
+                <div class="nav-cta">
+                    <a href="contact.html" class="btn btn-primary" style="padding: 10px 20px; font-size: 12px;">Get Quote</a>
+                </div>
                 <div class="menu-toggle">
                     <i data-lucide="menu"></i>
                 </div>
