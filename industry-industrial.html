@@ -19,6 +19,16 @@
             align-items: center;
             border-bottom: 1px solid rgba(0, 209, 255, 0.2);
         }
+        .section-title h2 {
+            font-size: clamp(1.6rem, 4vw, 2.6rem);
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            color: var(--text-main);
+            text-transform: uppercase;
+            margin: 0 auto;
+            max-width: 800px;
+        }
         .ind-summary-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -82,8 +92,6 @@
                     <li class="has-dropdown">
                         <a href="index.html#products">Products</a>
                         <div class="dropdown-menu">
-                            <a href="product-ucp.html" class="dropdown-item"><span>UCP Series</span></a>
-                            <a href="product-ucf.html" class="dropdown-item"><span>UCF Series</span></a>
                             <a href="product-ucfl.html" class="dropdown-item closure-ignore"><span>UCFL Series</span></a>
                             <a href="product-ucfc.html" class="dropdown-item"><span>UCFC Series</span></a>
                             <a href="product-uct.html" class="dropdown-item"><span>UCT Series</span></a>
@@ -110,7 +118,7 @@
     <section class="ind-hero">
         <div class="container">
             <div class="section-tag">ENGINEERING AUTHORITY</div>
-            <h1 style="color: white; font-size: 3.5rem;">Heavy <span class="blue">Industrial</span></h1>
+                <h1 style="font-size: clamp(2.2rem, 7vw, 3.8rem); font-weight: 900; line-height: 1.1; letter-spacing: -1px; text-transform: uppercase; color: white;">Heavy <span class="blue">Industrial</span></h1>
             <p style="color: rgba(255,255,255,0.8); max-width: 600px; font-size: 1.1rem; margin-top: 20px;">Precision-engineered pillow blocks designed for massive loads, extreme vibration, and continuous operation in the world's most demanding environments.</p>
         </div>
     </section>

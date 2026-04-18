@@ -1343,77 +1343,47 @@ nav {
 
 .section-title {
     text-align: center;
-    margin-bottom: 90px;
+    margin-bottom: 60px;
     position: relative;
-    padding: 20px 0;
+    padding: 0 20px;
 }
 
 .section-title .industrial-label {
     display: inline-block;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', monospace;
     font-size: 11px;
     font-weight: 800;
-    color: #FFFFFF;
+    color: var(--white);
     letter-spacing: 2px;
     text-transform: uppercase;
     margin-bottom: 25px;
     background: var(--primary-light);
-    color: var(--secondary);
-    padding: 4px 12px;
-    border-radius: 2px;
-    position: relative;
-    box-shadow: 4px 4px 0 rgba(0, 180, 216, 0.2);
+    padding: 6px 15px;
+    border-radius: 4px;
+    box-shadow: 0 4px 10px rgba(0, 180, 216, 0.3);
 }
 
 .section-title h2 {
-    display: inline-block;
-    font-size: 46px;
-    margin: 0 auto 20px;
-    position: relative;
-    padding: 20px 40px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -1.5px;
     color: var(--text-main);
-    font-weight: 900;
+    text-transform: uppercase;
+    margin: 0 auto;
+    max-width: 900px;
 }
 
-/* Industrial Corner Markers */
-.section-title h2::before,
-.section-title h2::after {
-    content: '';
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border-color: rgba(15, 23, 42, 0.1);
-    border-style: solid;
-    transition: all 0.4s ease;
-}
-
-.section-title h2::before {
-    top: 0;
-    left: 0;
-    border-width: 2px 0 0 2px; /* Top-Left L */
-}
-
-.section-title h2::after {
-    bottom: 0;
-    right: 0;
-    border-width: 0 2px 2px 0; /* Bottom-Right L */
-}
-
-.section-title:hover h2::before,
-.section-title:hover h2::after {
-    border-color: var(--primary-light);
-    width: 30px;
-    height: 30px;
+.blue {
+    color: var(--primary) !important;
 }
 
 .section-title p {
     color: var(--text-muted);
-    font-size: 15px;
-    max-width: 650px;
-    margin: 40px auto 0;
-    line-height: 1.8;
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 20px auto 0;
+    line-height: 1.6;
     font-weight: 500;
 }
 
