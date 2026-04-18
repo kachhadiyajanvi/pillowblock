@@ -2479,20 +2479,102 @@ footer {
 .ind-tile {
     display: none;
     opacity: 0;
-    background: var(--white);
+    background: transparent;
     border-radius: 8px;
-    border: 1px solid var(--border);
+    perspective: 1000px;
     transition: all 0.7s cubic-bezier(0.165, 0.84, 0.44, 1);
     position: relative;
-    overflow: hidden;
     min-height: 400px;
     cursor: pointer;
-    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
 }
 
 .ind-tile.active {
+    display: block;
+}
+.ind-tile-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+.ind-tile:hover .ind-tile-inner {
+    transform: rotateY(180deg);
+}
+
+.ind-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border-radius: 12px;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
+}
+
+.ind-face.front {
+    z-index: 2;
+    background: var(--bg-dark);
+}
+
+.ind-face.back {
+    background: #0a0f18 !important; /* Solid Opaque Dark */
+    transform: rotateY(180deg) translateZ(2px); /* Explicitly bring to front */
+    border: 1px solid var(--primary-light);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    z-index: 1;
+}
+
+.ind-tile:hover .ind-face.back {
+    z-index: 3; /* Ensure back is on top when hovered */
+}
+
+.ind-face.front {
+    z-index: 1;
+}
+
+.ind-tile:hover .ind-face.front {
+    pointer-events: none; /* Prevent front face from blocking clicks */
+}
+
+/* Ensure the back face is interactable when visible */
+.ind-tile:hover .ind-face.back {
+    pointer-events: auto;
+}
+
+.ind-face.back h4 {
+    font-size: 1.25rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+/* Enhanced Tactical Button with Hover */
+.btn-tac-cta {
+    display: inline-block;
+    background: white;
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 800;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+    border: 1px solid white;
+    box-shadow: 0 4px 15px rgba(0, 209, 255, 0.1);
+}
+
+.btn-tac-cta:hover {
+    background: transparent;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 209, 255, 0.3);
+    border-color: var(--primary);
 }
 
 .ind-bg {
@@ -2500,7 +2582,7 @@ footer {
     inset: 0;
     background-size: cover;
     background-position: center;
-    filter: brightness(0.7) contrast(1.1);
+    filter: brightness(0.6) contrast(1.1);
     transition: all 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
     z-index: 0;
 }
@@ -2511,22 +2593,10 @@ footer {
     inset: 0;
     background: linear-gradient(0deg, rgba(15, 23, 42, 0.95) 0%, transparent 100%);
     opacity: 0.8;
-    transition: opacity 0.6s ease;
 }
 
 .ind-tile:hover .ind-bg {
-    filter: brightness(1.1) contrast(1.1);
-    transform: scale(1.08);
-}
-
-.ind-tile:hover .ind-bg::after {
-    opacity: 0.7; /* Increased from 0.4 to keep background dark enough for text */
-}
-
-.ind-tile:hover {
-    transform: translateY(-20px);
-    border-color: var(--primary);
-    box-shadow: 0 30px 60px rgba(15, 23, 42, 0.1);
+    transform: scale(1.1);
 }
 
 .ind-id {
@@ -2557,6 +2627,7 @@ footer {
     margin-top: auto;
     padding: 60px 45px;
     z-index: 10;
+    background: transparent;
 }
 
 .ind-icon {
@@ -2591,10 +2662,10 @@ footer {
     text-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Added subtle shadow for legibility */
 }
 
-.ind-tile:hover h4 {
-    color: var(--white) !important; /* Changed from primary-light to white for visibility */
+.ind-tile:hover .ind-face.front h4 {
+    color: var(--white) !important;
     transform: translateX(10px);
-    text-shadow: 0 4px 15px rgba(0,0,0,0.5); /* Stronger shadow on hover */
+    text-shadow: 0 4px 15px rgba(0,0,0,0.5);
 }
 
 .ind-id {
@@ -2873,13 +2944,14 @@ footer {
 }
 
 /* WhatsApp Floating Button - Premium Industrial Style */
+/* --- TACTICAL HOLOGRAM WHATSAPP INTERFACE --- */
 .whatsapp-float {
     position: fixed;
     bottom: 40px;
-    left: 40px;
-    width: 60px;
-    height: 60px;
-    background: #25D366;
+    right: 40px;
+    width: 65px;
+    height: 65px;
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
     color: white;
     border-radius: 50%;
     display: flex;
@@ -2887,91 +2959,132 @@ footer {
     align-items: center;
     text-decoration: none;
     z-index: 10000;
-    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3), inset 0 4px 8px rgba(255, 255, 255, 0.3);
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 0 20px rgba(37, 211, 102, 0.4), inset 0 2px 5px rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .whatsapp-float i {
+    width: 30px;
+    height: 30px;
+    z-index: 5;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+}
+
+/* Rotating Tactical Multi-Orbit System */
+.wa-ring {
+    position: absolute;
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+    border: 1px solid rgba(0, 180, 216, 0.2);
+    border-radius: 50%;
+    border-top: 2px solid var(--primary-light);
+    animation: waRotateCW 4s linear infinite;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Secondary Orbit - CCW */
+.wa-ring::before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    right: 4px;
+    bottom: 4px;
+    border: 1px dashed rgba(0, 180, 216, 0.4);
+    border-radius: 50%;
+    animation: waRotateCCW 3s linear infinite;
+}
+
+/* Tertiary Pulse Edge */
+.wa-ring::after {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border: 1px solid rgba(0, 180, 216, 0.1);
+    border-radius: 50%;
+    animation: waOrbitPulse 2s ease-in-out infinite;
+}
+
+@keyframes waRotateCW {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes waRotateCCW {
+    0% { transform: rotate(360deg); }
+    100% { transform: rotate(0deg); }
+}
+
+@keyframes waOrbitPulse {
+    0%, 100% { transform: scale(1); opacity: 0.2; }
+    50% { transform: scale(1.1); opacity: 0.5; }
+}
+
+/* Holographic Icon Core */
+/* Clean High-Fidelity Icon Core */
+.whatsapp-float i,
+.whatsapp-float svg {
     width: 32px;
     height: 32px;
-    transition: all 0.4s ease;
+    z-index: 5;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.4));
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    fill: currentColor;
+}
+
+/* Ensure Text & HUD Elements stay hidden from the button core */
+.wa-tooltip, 
+.wa-scan {
+    display: none !important;
+}
+
+.whatsapp-float:hover i,
+.whatsapp-float:hover svg {
+    animation: holoFlicker 0.4s ease infinite;
+}
+
+@keyframes holoFlicker {
+    0% { opacity: 1; filter: brightness(1) drop-shadow(0 0 5px #fff); }
+    20% { opacity: 0.8; filter: brightness(1.5) drop-shadow(0 0 10px var(--primary-light)); }
+    40% { opacity: 1; filter: brightness(1.2) drop-shadow(0 0 7px #fff); }
+    60% { opacity: 0.9; filter: brightness(1.4) drop-shadow(0 0 12px var(--primary-light)); }
+    100% { opacity: 1; filter: brightness(1) drop-shadow(0 0 5px #fff); }
 }
 
 .whatsapp-float:hover {
-    transform: scale(1.1) translateY(-5px);
-    box-shadow: 0 15px 40px rgba(37, 211, 102, 0.4);
-    background: #22c05b;
+    transform: scale(1.05) translateY(-5px);
+    box-shadow: 0 15px 45px rgba(37, 211, 102, 0.6), 0 0 30px rgba(0, 180, 216, 0.4);
 }
 
-.whatsapp-float:hover i {
-    transform: rotate(5deg) scale(1.1);
+.whatsapp-float:hover .wa-ring {
+    animation-duration: 2s; /* Speed up outer ring */
+    border-top-color: #fff;
 }
 
-.wa-pulse {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background: #25D366;
-    opacity: 0.6;
-    z-index: -1;
-    animation: waPulse 2s infinite;
-}
-
-@keyframes waPulse {
-    0% { transform: scale(1); opacity: 0.6; }
-    100% { transform: scale(1.8); opacity: 0; }
-}
-
-.wa-tooltip {
-    position: absolute;
-    right: 80px;
-    background: var(--secondary);
-    color: #fff;
-    padding: 8px 15px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    border: 1px solid rgba(0, 180, 216, 0.2);
-    opacity: 0;
-    transform: translateX(20px);
-    transition: all 0.4s ease;
-    white-space: nowrap;
-    pointer-events: none;
-}
-
-.wa-tooltip::after {
-    content: '';
-    position: absolute;
-    right: -6px;
-    top: 50%;
-    transform: translateY(-50%) rotate(45deg);
-    width: 12px;
-    height: 12px;
-    background: var(--secondary);
-    border-right: 1px solid rgba(0, 180, 216, 0.2);
-    border-top: 1px solid rgba(0, 180, 216, 0.2);
-}
-
-.whatsapp-float:hover .wa-tooltip {
-    opacity: 1;
-    transform: translateX(0);
+.whatsapp-float:hover .wa-ring::before {
+    animation-duration: 1.5s; /* Speed up mid ring */
+    border-color: var(--primary-light);
 }
 
 @media (max-width: 768px) {
     .whatsapp-float {
         bottom: 25px;
-        left: 25px;
+        right: 25px;
         width: 50px;
         height: 50px;
     }
     .wa-tooltip {
-        display: none;
+        display: none !important;
     }
 }
 
