@@ -1,38 +1,56 @@
-// Initialize Lucide Icons
-lucide.createIcons();
+// Initialize Lucide Icons in the main initialization block below.
 
-// Scroll Header Effect
-window.addEventListener('scroll', () => {
-    const header = document.querySelector('header');
-    if (window.scrollY > 50) {
-        header.style.boxShadow = '0 5px 20px rgba(0,0,0,0.2)';
-    } else {
-        header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
-    }
-});
-
-// Smooth Scrolling
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            window.scrollTo({
-                top: target.offsetTop - 80,
-                behavior: 'smooth'
-            });
-        }
-    });
-});
-
+// --- SHARED UTILITIES & INIT ---
 document.addEventListener('DOMContentLoaded', () => {
+    // 1. Core Visuals & System Initialization
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
+    
+    // 2. Component Initialization
     initSectorFilter();
     initExcellenceSlider();
     initMobileMenu();
     initProductFilter();
     initPDFReader();
     initSpecTileTilt();
+    initScrollReveal(); // Initialize reveal logic early
+    initTimelineReveal();
+    
+    // 3. UI Interaction Logic
+    initSmoothScrolling();
+    initHeaderScrollEffect();
 });
+
+// Smooth Scrolling Implementation
+function initSmoothScrolling() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                window.scrollTo({
+                    top: target.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+}
+
+// Scroll Header Effect Implementation
+function initHeaderScrollEffect() {
+    window.addEventListener('scroll', () => {
+        const header = document.querySelector('header');
+        if (!header) return;
+        if (window.scrollY > 50) {
+            header.style.boxShadow = '0 5px 20px rgba(0,0,0,0.2)';
+        } else {
+            header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+        }
+    });
+}
+
 
 // --- CINEMATIC MOTION PROTOCOL ENGINE ---
 const initScrollReveal = () => {
@@ -41,15 +59,14 @@ const initScrollReveal = () => {
     if (!revealElements.length) return;
 
     const observerOption = {
-        threshold: 0.1,
-        rootMargin: "0px 0px -80px 0px"
+        threshold: 0.15, // Slightly higher threshold for better intent detection
+        rootMargin: "0px 0px -50px 0px" // Adjusted margin for slightly earlier reveal
     };
 
     const revealObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                // Unobserve after reveal to save resources
                 revealObserver.unobserve(entry.target);
             }
         });
@@ -57,7 +74,21 @@ const initScrollReveal = () => {
 
     revealElements.forEach(el => {
         revealObserver.observe(el);
+        
+        // Safety: Manual check for elements already in view
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+            el.classList.add('visible');
+            revealObserver.unobserve(el);
+        }
     });
+
+    // Fail-safe: After 3 seconds, force show everything that hasn't revealed
+    setTimeout(() => {
+        document.querySelectorAll('.reveal:not(.visible)').forEach(el => {
+            el.classList.add('reveal-force');
+        });
+    }, 3000);
 };
 
 
@@ -340,7 +371,7 @@ const initPDFReader = () => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
             const pdfUrl = btn.getAttribute('data-pdf');
-            const pdfTitle = btn.getAttribute('data-title') || 'Newsletter';
+            const pdfTitle = btn.getAttribute('data-title') || 'Product Catalogue';
             
             // 1. Setup UI
             title.textContent = pdfTitle;
@@ -413,17 +444,6 @@ const initTimelineReveal = () => {
     });
 };
 
-// Global Initialization
-document.addEventListener('DOMContentLoaded', () => {
-    if (typeof lucide !== 'undefined') {
-        lucide.createIcons();
-    }
-    
-    initPDFReader();
-    initTimelineReveal();
-    initSpecTileTilt();
-    initScrollReveal();
-});
 
 // ==========================================================================
 // SCHEMATIC 3D TILT ENGINE - Tactical HUD Technical Drawing Interaction

@@ -613,13 +613,17 @@ nav {
 /* Product Subpages Shared Styles */
 .prod-hero {
     min-height: 80vh;
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), url('assets/product-hero-bg.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     display: flex;
     align-items: center;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
     overflow: hidden;
     padding: 100px 0;
+    color: var(--white);
 }
 
 .prod-grid {
@@ -632,8 +636,9 @@ nav {
 .prod-content h1 {
     font-size: 3.2rem;
     margin-bottom: 20px;
-    line-height: 1;
-    color: var(--text-main);
+    line-height: 1.1;
+    color: var(--white);
+    font-weight: 900;
 }
 
 .prod-content h1 span.blue {
@@ -897,10 +902,11 @@ nav {
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: rgba(255, 255, 255, 0.3);
-    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-muted);
+    background: rgba(15, 23, 42, 0.05);
     padding: 4px 10px;
     border-radius: 4px;
+    font-weight: 700;
 }
 
 .tile-main-spec {
@@ -943,8 +949,9 @@ nav {
 .stat-lbl {
     font-size: 10px;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.3);
+    color: var(--text-muted);
     letter-spacing: 1px;
+    font-weight: 600;
 }
 
 .stat-val {
@@ -4604,6 +4611,23 @@ footer {
 .stagger-item:nth-child(8) { transition-delay: 0.8s; }
 .stagger-item:nth-child(9) { transition-delay: 0.9s; }
 .stagger-item:nth-child(10) { transition-delay: 1s; }
+
+/* --- REVEAL FALLBACK ---
+   Ensures content is visible if JS fail to initialize or intersection observer misses its cue.
+*/
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+}
+
+.reveal.reveal-force,
+.no-js .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+}
 
 /* Smooth Section Transitions */
 section {
