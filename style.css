@@ -630,7 +630,7 @@ nav {
 }
 
 .prod-content h1 {
-    font-size: clamp(3rem, 8vw, 5rem);
+    font-size: 3.2rem;
     margin-bottom: 20px;
     line-height: 1;
     color: var(--text-main);
@@ -1289,10 +1289,10 @@ nav {
 }
 
 .hero h1 {
-    font-size: clamp(32px, 5vw, 56px);
-    margin-bottom: 20px; /* Reduced from 30px */
-    color: var(--white); /* Keep white for hero if it's on a dark image/video background, but check context */
-    line-height: 1.2;
+    font-size: clamp(1.8rem, 6vw, 3.2rem);
+    margin-bottom: 20px;
+    color: var(--white);
+    line-height: 1.1;
     text-transform: none;
     font-weight: 800;
 }
@@ -1364,14 +1364,14 @@ nav {
 }
 
 .section-title h2 {
-    font-size: clamp(2.2rem, 5vw, 3.5rem);
+    font-size: clamp(1.8rem, 4.5vw, 2.6rem);
     font-weight: 800;
-    line-height: 1.1;
-    letter-spacing: -1.5px;
+    line-height: 1.2;
+    letter-spacing: -1px;
     color: var(--text-main);
     text-transform: uppercase;
     margin: 0 auto;
-    max-width: 900px;
+    max-width: 800px;
 }
 
 .blue {
