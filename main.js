@@ -34,26 +34,31 @@ document.addEventListener('DOMContentLoaded', () => {
     initSpecTileTilt();
 });
 
-// Reveal animations on scroll
-const observerOptions = {
-    threshold: 0.1
-};
+// --- CINEMATIC MOTION PROTOCOL ENGINE ---
+const initScrollReveal = () => {
+    const revealElements = document.querySelectorAll('.reveal');
+    
+    if (!revealElements.length) return;
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
+    const observerOption = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -80px 0px"
+    };
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                // Unobserve after reveal to save resources
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, observerOption);
+
+    revealElements.forEach(el => {
+        revealObserver.observe(el);
     });
-}, observerOptions);
-
-document.querySelectorAll('.product-card, .feature-item, .industry-card').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'all 0.6s ease-out';
-    observer.observe(el);
-});
+};
 
 
 
@@ -417,6 +422,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initPDFReader();
     initTimelineReveal();
     initSpecTileTilt();
+    initScrollReveal();
 });
 
 // ==========================================================================
