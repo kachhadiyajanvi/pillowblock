@@ -17,7 +17,8 @@
     <link rel="stylesheet" href="style.css">
     <style>
         :root {
-            --blueprint-line: rgba(0, 163, 255, 0.04);
+            --blueprint-line: rgba(10, 13, 18, 0.05);
+            --motion-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         body {
@@ -26,7 +27,17 @@
             overflow-x: hidden;
         }
 
-        /* Blueprint Grid Overlay (Subtle Light) */
+        /* Reveal Animation */
+        @keyframes revealUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .reveal-node {
+            animation: revealUp 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+        }
+
+        /* Blueprint Grid Overlay */
         .blueprint-bg {
             position: fixed;
             top: 0;
@@ -36,214 +47,355 @@
             background-image: 
                 linear-gradient(var(--blueprint-line) 1px, transparent 1px),
                 linear-gradient(90deg, var(--blueprint-line) 1px, transparent 1px);
-            background-size: 80px 80px;
+            background-size: 100px 100px;
             pointer-events: none;
             z-index: 0;
-            opacity: 0.8;
+            opacity: 0.6;
         }
 
-        /* Contact Hero Restoration */
-        .portal-hero {
-            min-height: 45vh;
-            display: flex;
-            align-items: center;
+        /* Hero Minimal Style */
+        .contact-hero-minimal {
             background: var(--secondary);
-            padding: 100px 0 60px;
+            padding: 120px 0 100px;
+            text-align: center;
             position: relative;
             z-index: 2;
             overflow: hidden;
         }
 
-        .portal-hero::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 40%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 163, 255, 0.05));
-            pointer-events: none;
+        .contact-hero-minimal h1 {
+            font-size: clamp(3rem, 10vw, 5.5rem);
+            color: var(--text-main);
+            font-weight: 900;
+            letter-spacing: -3px;
+            margin: 0;
+            text-transform: uppercase;
+            transition: var(--motion-smooth);
         }
 
-        /* Contact Layout Grid */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 60px;
-            padding: 80px 0;
+        .contact-hero-minimal h1 .blue {
+            color: var(--primary);
+            transition: var(--motion-smooth);
+        }
+
+        /* Main Floating Layout */
+        .main-contact-wrap {
+            margin-top: -60px;
+            padding-bottom: 80px;
             position: relative;
-            z-index: 2;
+            z-index: 5;
         }
 
-        /* Information & Form Cards - Light Industrial */
+        .floating-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: flex-start;
+        }
+
+        /* Info Section (Left) */
+        .get-in-touch {
+            padding: 40px 0;
+        }
+
+        .get-in-touch h2 {
+            font-size: 2.5rem;
+            color: var(--text-main);
+            margin-bottom: 20px;
+            font-weight: 800;
+            transition: var(--motion-smooth);
+        }
+
+        .get-in-touch p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            max-width: 450px;
+        }
+
+        .contact-node {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            margin-bottom: 35px;
+            transition: var(--motion-smooth);
+            cursor: pointer;
+        }
+
+        .contact-node:hover {
+            transform: translateX(10px);
+        }
+
+        .node-icon {
+            width: 60px;
+            height: 60px;
+            background: #f1f5f9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            flex-shrink: 0;
+            transition: var(--motion-smooth);
+            box-shadow: 0 0 0 rgba(0, 119, 182, 0);
+        }
+
+        .contact-node:hover .node-icon {
+            background: var(--primary);
+            color: var(--white);
+            transform: scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 119, 182, 0.3);
+        }
+
+        .node-content h4 {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            margin-bottom: 5px;
+            font-weight: 800;
+        }
+
+        .node-content span {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            display: block;
+            transition: var(--motion-smooth);
+        }
+
+        .contact-node:hover .node-content span {
+            color: var(--text-main);
+        }
+
+        /* Floating Form Card (Right) */
         .contact-form-card {
             background: var(--white);
+            padding: 60px;
+            border-radius: 12px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.08);
             border: 1px solid var(--border);
-            padding: 50px;
-            border-radius: 4px;
-            position: relative;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
+            transition: var(--motion-smooth);
         }
 
-        .form-header {
+        .contact-form-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 45px 90px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-title {
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 3px;
+            color: var(--primary);
+            display: block;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .contact-form-card h3 {
+            font-size: 24px;
             margin-bottom: 40px;
-            padding-bottom: 25px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .form-header h3 {
-            font-size: 28px;
             color: var(--text-main);
             font-weight: 800;
-            margin-bottom: 10px;
-            letter-spacing: -1px;
         }
 
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-bottom: 30px;
+            gap: 25px;
+            margin-bottom: 25px;
         }
 
         .input-group {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
+            position: relative;
         }
 
         .input-group label {
             font-size: 11px;
             font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 2px;
             color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: var(--motion-smooth);
         }
 
         .input-group input, 
         .input-group textarea {
-            background: #f8fafc;
-            border: 1px solid var(--border);
-            padding: 16px;
-            color: var(--text-main);
-            font-family: inherit;
+            border: none;
+            border-bottom: 1px solid #cbd5e1;
+            padding: 12px 0;
+            background: transparent;
             font-size: 15px;
-            border-radius: 4px;
-            transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+            color: var(--text-main);
+            transition: var(--motion-smooth);
+            width: 100%;
         }
 
         .input-group input:focus, 
         .input-group textarea:focus {
             outline: none;
-            border-color: var(--primary);
-            background: var(--white);
-            box-shadow: 0 5px 20px rgba(0, 163, 255, 0.08);
+            border-bottom-color: var(--primary);
         }
 
-        .input-group input::placeholder,
-        .input-group textarea::placeholder {
-            color: #94a3b8;
-        }
-
-        /* Tactical Selector Light HUD Skin */
-        .tactical-selector-trigger {
-            background: #f8fafc;
-            color: var(--text-main);
-            border: 1px solid var(--border);
-        }
-
-        .tactical-selector-trigger.is-open {
-            border-color: var(--primary);
-            background: var(--white);
-        }
-
-        .tactical-options {
-            background: var(--white);
-            border: 1px solid var(--primary);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-
-        .tactical-option {
-            color: var(--text-main);
-            border-bottom: 1px solid #f1f5f9;
-        }
-
-        .tactical-option:hover {
-            background: rgba(0, 163, 255, 0.05);
-            color: var(--primary);
-        }
-
-        .tactical-option.is-selected {
+        .input-group::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
             background: var(--primary);
-            color: var(--white);
+            transition: var(--motion-smooth);
         }
 
-        /* Location Protocols */
-        .location-protocol {
+        .input-group:focus-within::after {
+            width: 100%;
+        }
+
+        .btn-primary {
+            transition: var(--motion-smooth) !important;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 119, 182, 0.4);
+        }
+
+        .btn-primary::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .btn-primary:hover::after {
+            left: 100%;
+        }
+
+        /* Map Section */
+        .map-section {
+            padding: 0;
+            position: relative;
+            height: 500px;
+            background: #f1f5f9;
+            overflow: hidden;
+            transition: var(--motion-smooth);
+        }
+
+        .map-section iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            filter: grayscale(0.1) contrast(1.1);
+            transition: var(--motion-smooth);
+        }
+
+        .map-section:hover iframe {
+            filter: grayscale(0) contrast(1);
+            transform: scale(1.02);
+        }
+
+        /* Engagement Banner */
+        .engagement-banner {
+            background: linear-gradient(135deg, var(--primary), #0081cc);
+            padding: 60px 0;
+            margin-top: -50px;
+            position: relative;
+            z-index: 10;
+            border-radius: 16px;
+            box-shadow: 0 30px 60px rgba(0, 163, 255, 0.2);
+            transition: var(--motion-smooth);
+        }
+
+        .engagement-banner:hover {
+            transform: scale(1.01);
+            box-shadow: 0 40px 80px rgba(0, 163, 255, 0.3);
+        }
+
+        .eb-content {
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
             gap: 30px;
         }
 
-        .info-card {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-left: 4px solid var(--primary);
-            padding: 40px;
-            border-radius: 4px;
-            transition: all 0.4s ease;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.02);
-        }
-
-        .info-card:hover {
-            transform: translateX(10px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
-        }
-
-        .info-card h4 {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            color: var(--primary);
+        .eb-text h3 {
+            font-size: 2rem;
+            color: var(--white);
+            margin-bottom: 5px;
             font-weight: 800;
-            margin-bottom: 20px;
         }
 
-        .info-card p {
-            font-size: 1.05rem;
-            line-height: 1.8;
-            color: var(--text-main);
+        .eb-text p {
+            color: rgba(255, 255, 255, 0.8);
             font-weight: 500;
         }
 
-        /* Global Map Integration */
-        .map-global-section {
-            padding: 80px 0 100px;
-            position: relative;
-            z-index: 2;
-            background: var(--secondary);
-        }
-
-        .map-global-wrap {
-            height: 500px;
-            background: #f1f5f9;
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            overflow: hidden;
-            position: relative;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
-        }
-
-        .map-global-wrap iframe {
+        .eb-form {
+            display: flex;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
             width: 100%;
-            height: 100%;
-            filter: grayscale(0.2);
+            max-width: 500px;
+            transition: var(--motion-smooth);
+        }
+
+        .eb-form:focus-within {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .eb-form input {
+            background: transparent;
             border: none;
+            padding: 0 25px;
+            color: var(--white);
+            flex: 1;
+            font-size: 1rem;
+        }
+
+        .eb-form input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .eb-form input:focus {
+            outline: none;
+        }
+
+        .eb-form button {
+            background: var(--white);
+            color: var(--primary);
+            border: none;
+            padding: 12px 35px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--motion-smooth);
+        }
+
+        .eb-form button:hover {
+            background: var(--secondary);
+            color: var(--white);
+            transform: translateY(-2px);
         }
 
         @media (max-width: 992px) {
-            .contact-grid { grid-template-columns: 1fr; gap: 40px; }
-            .form-row { grid-template-columns: 1fr; }
+            .floating-grid { grid-template-columns: 1fr; gap: 40px; }
+            .eb-content { justify-content: center; text-align: center; }
+            .eb-form { max-width: 100%; }
         }
     </style>
 </head>
@@ -333,117 +485,111 @@
         </div>
     </header>
 
-    <section class="portal-hero">
+    <!-- Hero Section -->
+    <section class="contact-hero-minimal">
         <div class="container">
-            <div class="section-title">
-                <h1 style="font-size: clamp(2.5rem, 8vw, 4.5rem); color: var(--text-main); line-height: 1; font-weight: 900; margin-bottom: 30px; letter-spacing: -3px;">
-                    GET IN <span class="blue">TOUCH</span>.
-                </h1>
-                <p style="color: var(--text-muted); font-size: 1.2rem; line-height: 1.7; max-width: 650px; font-weight: 500; border-left: 4px solid var(--primary); padding-left: 20px;">
-                    Our engineering team is ready to support your technical requirements. Reach out for expert guidance on high-precision bearings and global industrial logistics.
-                </p>
-            </div>
+            <h1 class="reveal-node">CONTACT <span class="blue">US</span></h1>
         </div>
     </section>
 
-    <!-- Core Content -->
-    <section class="section">
+    <!-- Main Content Wrap -->
+    <main class="main-contact-wrap reveal-node" style="animation-delay: 0.2s;">
         <div class="container">
-            <div class="contact-grid">
+            <div class="floating-grid">
                 
-                <!-- Simplified Form Card -->
-                <div class="contact-form-card">
-                    <div class="form-header">
-                        <h3>Send a Message</h3>
-                        <p style="color: var(--text-muted); font-size: 14px;">Complete the form below for direct technical support.</p>
+                <!-- Left: Info Column -->
+                <div class="get-in-touch">
+                    <h2>Get In Touch</h2>
+                    <p>Our engineering core is ready to support your technical requirements. Connect with us for expert guidance on high-precision bearings and industrial logistics.</p>
+                    
+                    <div class="contact-node">
+                        <div class="node-icon">
+                            <i data-lucide="map-pin"></i>
+                        </div>
+                        <div class="node-content">
+                            <h4>Global Headquarters</h4>
+                            <span>Aryan Corporate Park, Ahmedabad, Gujarat 380054</span>
+                        </div>
                     </div>
 
+                    <div class="contact-node">
+                        <div class="node-icon">
+                            <i data-lucide="mail"></i>
+                        </div>
+                        <div class="node-content">
+                            <h4>Technical Support</h4>
+                            <span>pillowblock@cnzbearings.com</span>
+                        </div>
+                    </div>
+
+                    <div class="contact-node">
+                        <div class="node-icon">
+                            <i data-lucide="phone"></i>
+                        </div>
+                        <div class="node-content">
+                            <h4>24/7 Logistics Line</h4>
+                            <span>+91 8511153657</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Floating Form Card -->
+                <div class="contact-form-card">
+                    <span class="card-title">Secured Uplink</span>
+                    <h3>Your Details</h3>
+                    
                     <form id="contactForm" action="https://formspree.io/f/mzdyzllk" method="POST">
                         <input type="hidden" name="subject" value="New Engineering Inquiry | CNZ Bearings">
                         
                         <div class="form-row">
                             <div class="input-group">
-                                <label>Full Name</label>
-                                <input type="text" name="name" placeholder="Enter your name..." required>
+                                <label>Name *</label>
+                                <input type="text" name="name" placeholder="Your Name" required>
                             </div>
                             <div class="input-group">
-                                <label>Email Address</label>
-                                <input type="email" name="email" placeholder="Enter your email..." required>
+                                <label>Email Address *</label>
+                                <input type="email" name="email" placeholder="Your Email" required>
                             </div>
                         </div>
 
-                        <div class="form-row">
-                            <div class="input-group">
-                                <label>Inquiry Type</label>
-                                <div class="tactical-selector-wrap">
-                                    <div class="tactical-selector-trigger" id="tactical_selector_trigger">
-                                        <span id="selector_label">Select an option...</span>
-                                        <i data-lucide="chevron-down"></i>
-                                    </div>
-                                    <div class="tactical-options" id="tactical_options_console">
-                                        <div class="hud-corner tl"></div>
-                                        <div class="hud-corner tr"></div>
-                                        <div class="hud-corner bl"></div>
-                                        <div class="hud-corner br"></div>
-                                        <div class="tactical-option" data-value="tech">Technical Inquiry</div>
-                                        <div class="tactical-option" data-value="bulk">Bulk Procurement</div>
-                                        <div class="tactical-option" data-value="dist">Distribution Partnership</div>
-                                        <div class="tactical-option" data-value="other">Other Support</div>
-                                    </div>
-                                    <input type="hidden" name="subject_vector" id="subject_vector_input" value="" required>
-                                </div>
-                            </div>
-                            <div class="input-group">
-                                <label>Phone Number</label>
-                                <input type="tel" name="phone" placeholder="Enter phone number...">
-                            </div>
+                        <div class="input-group" style="margin-bottom: 25px;">
+                            <label>Subject *</label>
+                            <input type="text" name="subject_input" placeholder="Message Subject" required>
                         </div>
 
                         <div class="input-group" style="margin-bottom: 40px;">
-                            <label>Message Details</label>
-                            <textarea name="message" rows="6" placeholder="How can we help with your technical requirements?"></textarea>
+                            <label>Comments / Questions *</label>
+                            <textarea name="message" rows="4" placeholder="Your Message" required style="resize: vertical;"></textarea>
                         </div>
 
-                        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 20px;">
+                        <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 20px; border-radius: 50px;">
                             <i data-lucide="send"></i> SUBMIT INQUIRY
                         </button>
                     </form>
                 </div>
 
-                <!-- Info Column -->
-                <div class="location-protocol">
-                    <div class="info-card">
-                        <h4>Global Headquarters</h4>
-                        <p>Aryan Corporate Park, 17, Railway Crossing,<br>Nr. Thaltej, Ahmedabad, Gujarat 380054</p>
-                    </div>
-
-                    <div class="info-card">
-                        <h4>Contact Details</h4>
-                        <p style="margin-bottom: 12px; display: flex; align-items: center;">
-                            <i data-lucide="phone" size="18" style="margin-right: 15px; color: var(--primary);"></i> 
-                            +91 8511153657
-                        </p>
-                        <p style="display: flex; align-items: center;">
-                            <i data-lucide="mail" size="18" style="margin-right: 15px; color: var(--primary);"></i> 
-                            pillowblock@cnzbearings.com
-                        </p>
-                    </div>
-
-                    <div class="info-card">
-                        <h4>Business Hours</h4>
-                        <p>Monday - Friday: 09:00 - 18:00<br>Saturday: 09:00 - 14:00</p>
-                    </div>
-                </div>
             </div>
         </div>
+    </main>
+
+    <!-- Map Section -->
+    <section class="map-section">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.558312061456!2d72.518684!3d23.040187!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e84992569f727%3A0xe7819077977eb931!2sAryan%20Corporate%20Park!5e0!3m2!1sen!2sin!4v1712830000000!5m2!1sen!2sin" 
+                allowfullscreen="" loading="lazy"></iframe>
     </section>
 
-    <!-- Global Presence Section (Map) -->
-    <section class="map-global-section">
-        <div class="container">
-            <div class="map-global-wrap">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.558312061456!2d72.518684!3d23.040187!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x395e84992569f727%3A0xe7819077977eb931!2sAryan%20Corporate%20Park!5e0!3m2!1sen!2sin!4v1712830000000!5m2!1sen!2sin" 
-                        allowfullscreen="" loading="lazy"></iframe>
+    <!-- Engagement Banner -->
+    <section class="container" style="margin-bottom: 80px;">
+        <div class="engagement-banner">
+            <div class="container eb-content">
+                <div class="eb-text">
+                    <h3>Keep Updated About Our Product</h3>
+                    <p>Get technical updates and latest catalogue editions directly in your inbox.</p>
+                </div>
+                <div class="eb-form">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit">SUBMIT</button>
+                </div>
             </div>
         </div>
     </section>
@@ -495,96 +641,57 @@
     <script>
         lucide.createIcons();
 
-        // Tactical Selector Logic: Direct Interface Control
-        const selectorTrigger = document.getElementById('tactical_selector_trigger');
-        const optionsConsole = document.getElementById('tactical_options_console');
-        const selectorLabel = document.getElementById('selector_label');
-        const hiddenInput = document.getElementById('subject_vector_input');
-        const options = document.querySelectorAll('.tactical-option');
+        // Form Handling: Professional Transmission Script
+        const contactForm = document.getElementById('contactForm');
+        
+        if (contactForm) {
+            contactForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btn = contactForm.querySelector('button');
+                const originalText = btn.innerHTML;
+                
+                // Visual Initiation
+                btn.innerHTML = '<i data-lucide="loader" class="spin"></i> SENDING...';
+                lucide.createIcons();
+                btn.disabled = true;
 
-        if (selectorTrigger) {
-            selectorTrigger.addEventListener('click', () => {
-                selectorTrigger.classList.toggle('is-open');
-                optionsConsole.classList.toggle('is-visible');
-            });
-
-            options.forEach(option => {
-                option.addEventListener('click', () => {
-                    const value = option.getAttribute('data-value');
-                    const text = option.textContent;
+                const formData = new FormData(contactForm);
+                
+                try {
+                    const response = await fetch("https://formspree.io/f/mzdyzllk", {
+                        method: "POST",
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
                     
-                    selectorLabel.textContent = text;
-                    hiddenInput.value = value;
-                    
-                    options.forEach(opt => opt.classList.remove('is-selected'));
-                    option.classList.add('is-selected');
-                    
-                    selectorTrigger.classList.remove('is-open');
-                    optionsConsole.classList.remove('is-visible');
-                });
-            });
-
-            // Close on outside click: Signal Interruption
-            document.addEventListener('click', (e) => {
-                if (!selectorTrigger.contains(e.target) && !optionsConsole.contains(e.target)) {
-                    selectorTrigger.classList.remove('is-open');
-                    optionsConsole.classList.remove('is-visible');
+                    if (response.ok) {
+                        // Success Feedback
+                        btn.innerHTML = '<i data-lucide="check"></i> MESSAGE SENT SUCCESSFULLY';
+                        btn.style.background = '#00FF95'; // Success Green
+                        btn.style.color = '#0A0D12'; 
+                        contactForm.reset();
+                        
+                        setTimeout(() => {
+                            btn.innerHTML = originalText;
+                            btn.style.background = '';
+                            btn.style.color = '';
+                            btn.disabled = false;
+                            lucide.createIcons();
+                        }, 5000);
+                    } else {
+                        btn.innerHTML = '<i data-lucide="alert-triangle"></i> ERROR SENDING';
+                        btn.style.background = '#FF4D4D';
+                    }
+                } catch (error) {
+                    btn.innerHTML = '<i data-lucide="alert-triangle"></i> UPLINK_FAILURE';
+                    btn.style.background = '#FF4D4D';
+                } finally {
+                    lucide.createIcons();
                 }
             });
         }
-        
-        // Form Handling: Tactical Transmission Script
-        const contactForm = document.getElementById('contactForm');
-        
-        contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const btn = contactForm.querySelector('button');
-            const originalText = btn.innerHTML;
-            
-            // Visual Initiation
-            btn.innerHTML = '<i data-lucide="loader" class="spin"></i> SCANNING...';
-            lucide.createIcons();
-            btn.disabled = true;
-
-            const formData = new FormData(contactForm);
-            
-            try {
-                const response = await fetch("https://formspree.io/f/mzdyzllk", {
-                    method: "POST",
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-                
-                if (response.ok) {
-                    // Success HUD Feedback
-                    btn.innerHTML = '<i data-lucide="check"></i> THANK YOU! WE WILL CONTACT YOU SOON.';
-                    btn.style.background = '#00FF95'; // Success Green
-                    btn.style.borderColor = '#00FF95';
-                    btn.style.color = '#0A0D12'; // High contrast
-                    contactForm.reset();
-                    
-                    // Reset selector label
-                    if (selectorLabel) selectorLabel.textContent = "Select an option...";
-
-                    // Auto-refresh the page after 3 seconds
-                    setTimeout(() => {
-                        window.location.reload();
-                    }, 3000);
-                } else {
-                    // Error HUD Feedback
-                    const result = await response.json();
-                    btn.innerHTML = '<i data-lucide="alert-triangle"></i> SIGNAL_INTERRUPTED';
-                    btn.style.background = '#FF4D4D';
-                }
-            } catch (error) {
-                btn.innerHTML = '<i data-lucide="alert-triangle"></i> UPLINK_FAILURE';
-                btn.style.background = '#FF4D4D';
-            } finally {
-                lucide.createIcons();
-            }
-        });
     </script>
 </body>
 
