@@ -17,15 +17,16 @@
     <link rel="stylesheet" href="style.css">
     <style>
         :root {
-            --blueprint-line: rgba(255, 255, 255, 0.07);
+            --blueprint-line: rgba(0, 163, 255, 0.04);
         }
 
         body {
-            background-color: #06080c;
+            background-color: var(--white);
+            color: var(--text-main);
             overflow-x: hidden;
         }
 
-        /* Blueprint Grid Overlay */
+        /* Blueprint Grid Overlay (Subtle Light) */
         .blueprint-bg {
             position: fixed;
             top: 0;
@@ -44,19 +45,19 @@
         /* Tactical Split Hero */
         .engagement-hero {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            min-height: 100vh;
-            border-bottom: 1px solid var(--border);
+            grid-template-columns: 1fr 1.2fr;
+            min-height: 80vh;
+            border-bottom: 2px solid var(--primary);
             position: relative;
             z-index: 2;
         }
 
         .hero-left {
-            padding: 150px 80px 100px;
+            padding: 120px 80px 80px;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            background: linear-gradient(90deg, #06080c 80%, transparent);
+            background: linear-gradient(90deg, var(--white) 85%, transparent);
         }
 
         .hero-right {
@@ -76,9 +77,9 @@
             height: 100%;
             background: linear-gradient(90deg, 
                 transparent, 
-                rgba(0, 163, 255, 0.1), 
-                rgba(0, 163, 255, 0.4), 
-                rgba(0, 163, 255, 0.1), 
+                rgba(0, 163, 255, 0.05), 
+                rgba(0, 163, 255, 0.15), 
+                rgba(0, 163, 255, 0.05), 
                 transparent);
             animation: scanLine 8s linear infinite;
         }
@@ -91,8 +92,9 @@
         /* Engagement Timeline */
         .technical-timeline {
             position: relative;
-            padding: 120px 0;
+            padding: 100px 0;
             z-index: 2;
+            background: var(--secondary);
         }
 
         .timeline-axis {
@@ -102,12 +104,12 @@
             width: 2px;
             height: 100%;
             background: linear-gradient(to bottom, transparent, var(--primary), var(--primary), transparent);
-            box-shadow: 0 0 15px var(--primary);
+            opacity: 0.3;
         }
 
         .engagement-node {
             position: relative;
-            margin-bottom: 150px;
+            margin-bottom: 120px;
             padding-left: 100px;
         }
 
@@ -118,30 +120,28 @@
             width: 16px;
             height: 16px;
             background: var(--primary);
-            border: 3px solid var(--secondary);
+            border: 3px solid var(--white);
             border-radius: 50%;
-            box-shadow: var(--glow-primary);
             z-index: 3;
         }
 
         .engagement-card {
-            background: rgba(255, 255, 255, 0.03);
+            background: var(--white);
             border: 1px solid var(--border);
             border-radius: 4px;
             max-width: 1000px;
             display: grid;
-            grid-template-columns: 350px 1fr;
+            grid-template-columns: 380px 1fr;
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             cursor: default;
         }
 
         .engagement-card:hover {
-            transform: translateX(15px) scale(1.02);
-            background: rgba(255, 255, 255, 0.06);
+            transform: translateX(10px);
             border-color: var(--primary);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), var(--glow-primary);
+            box-shadow: 0 20px 50px rgba(0, 163, 255, 0.08);
         }
 
         /* Tactical Slider */
@@ -149,7 +149,7 @@
             position: relative;
             height: 100%;
             min-height: 480px;
-            background: #000;
+            background: #f1f5f9;
             overflow: hidden;
             border-right: 1px solid var(--border);
         }
@@ -160,30 +160,28 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-size: contain;
+            background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             opacity: 0;
-            transition: opacity 1.5s ease-in-out, transform 8s ease-out;
-            transform: scale(1.1);
+            transition: opacity 1s ease-in-out;
         }
 
         .slide.active {
             opacity: 1;
-            transform: scale(1);
         }
 
         .slide-overlay-label {
             position: absolute;
             top: 20px;
             left: 20px;
-            background: rgba(0, 163, 255, 0.2);
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(5px);
-            padding: 5px 12px;
-            border: 1px solid rgba(0, 163, 255, 0.4);
+            padding: 6px 14px;
+            border: 1px solid var(--primary);
             color: var(--primary);
             font-size: 10px;
-            font-weight: 900;
+            font-weight: 800;
             letter-spacing: 2px;
             z-index: 5;
             text-transform: uppercase;
@@ -193,7 +191,7 @@
             position: absolute;
             bottom: 0;
             left: 0;
-            height: 3px;
+            height: 4px;
             background: var(--primary);
             width: 0%;
             z-index: 10;
@@ -208,19 +206,21 @@
 
         .node-id-tag {
             font-size: 11px;
-            font-weight: 900;
+            font-weight: 800;
             color: var(--primary);
             letter-spacing: 3px;
             margin-bottom: 20px;
             display: block;
+            text-transform: uppercase;
         }
 
         .node-title {
-            font-size: 2.8rem;
-            color: #fff;
+            font-size: 3rem;
+            color: var(--text-main);
             font-weight: 900;
-            line-height: 1;
+            line-height: 0.9;
             margin-bottom: 25px;
+            letter-spacing: -2px;
         }
 
         .node-meta {
@@ -273,8 +273,7 @@
         <div class="container nav-container">
             <nav style="position: relative; z-index: 10;">
                 <div class="logo-container">
-                    <a href="index.html" class="logo"><img src="assets/logo.png" alt="CNZ Bearings Logo"
-                            style="height: 45px;"></a>
+                    <a href="index.html" class="logo"><img src="assets/logo.png" alt="CNZ Bearings Logo"></a>
                 </div>
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
@@ -284,35 +283,35 @@
                             <div class="container">
                                 <div class="mega-grid">
                                     <div class="mega-col">
-                                        <div class="mega-title"><i data-lucide="factory"></i>Heavy Industrial</div>
+                                        <div class="mega-title">Heavy Industrial</div>
                                         <ul class="mega-list">
-                                            <li><a href="industry-industrial.html" class="mega-item"><i data-lucide="cog"></i>Manufacturing & Production</a></li>
-                                            <li><a href="industry-industrial.html" class="mega-item"><i data-lucide="pickaxe"></i>Mining & Heavy Industry</a></li>
-                                            <li><a href="industry-industrial.html" class="mega-item"><i data-lucide="building"></i>Construction & Infrastructure</a></li>
-                                            <li><a href="industry-industrial.html" class="mega-item"><i data-lucide="car"></i>Automotive & Transportation</a></li>
-                                            <li><a href="industry-industrial.html" class="mega-item"><i data-lucide="anvil"></i>Steel & Metal Processing</a></li>
+                                            <li><a href="industry-industrial.html" class="mega-item">Manufacturing & Production</a></li>
+                                            <li><a href="industry-industrial.html" class="mega-item">Mining & Heavy Industry</a></li>
+                                            <li><a href="industry-industrial.html" class="mega-item">Construction & Infrastructure</a></li>
+                                            <li><a href="industry-industrial.html" class="mega-item">Automotive & Transportation</a></li>
+                                            <li><a href="industry-industrial.html" class="mega-item">Steel & Metal Processing</a></li>
                                         </ul>
                                     </div>
                                     <div class="mega-col">
-                                        <div class="mega-title"><i data-lucide="flask-conical"></i>Process & Sciences</div>
+                                        <div class="mega-title">Process & Sciences</div>
                                         <ul class="mega-list">
-                                            <li><a href="industry-process.html" class="mega-item"><i data-lucide="utensils"></i>Food & Beverage Processing</a></li>
-                                            <li><a href="industry-process.html" class="mega-item"><i data-lucide="pill"></i>Pharmaceutical & Healthcare</a></li>
-                                            <li><a href="industry-process.html" class="mega-item"><i data-lucide="beaker"></i>Chemical & Process Industry</a></li>
-                                            <li><a href="industry-process.html" class="mega-item"><i data-lucide="scroll"></i>Textile & Paper Industry</a></li>
-                                            <li><a href="industry-process.html" class="mega-item"><i data-lucide="recycle"></i>Recycling & Waste Management</a></li>
+                                            <li><a href="industry-process.html" class="mega-item">Food & Beverage Processing</a></li>
+                                            <li><a href="industry-process.html" class="mega-item">Pharmaceutical & Healthcare</a></li>
+                                            <li><a href="industry-process.html" class="mega-item">Chemical & Process Industry</a></li>
+                                            <li><a href="industry-process.html" class="mega-item">Textile & Paper Industry</a></li>
+                                            <li><a href="industry-process.html" class="mega-item">Recycling & Waste Management</a></li>
                                         </ul>
                                     </div>
                                     <div class="mega-col">
-                                        <div class="mega-title"><i data-lucide="zap"></i>Energy & Infrastructure</div>
+                                        <div class="mega-title">Energy & Infrastructure</div>
                                         <ul class="mega-list">
-                                            <li><a href="industry-infrastructure.html" class="mega-item"><i data-lucide="tractor"></i>Agriculture & Farming</a></li>
-                                            <li><a href="industry-infrastructure.html" class="mega-item"><i data-lucide="fan"></i>HVAC & Ventilation</a></li>
-                                            <li><a href="industry-infrastructure.html" class="mega-item"><i data-lucide="truck"></i>Material Handling & Logistics</a></li>
-                                            <li><a href="industry-infrastructure.html" class="mega-item"><i data-lucide="sun"></i>Renewable Energy</a></li>
-                                            <li><a href="industry-infrastructure.html" class="mega-item"><i data-lucide="package"></i>Packaging & Printing</a></li>
-                                            <li><a href="industry-infrastructure.html" class="mega-item"><i data-lucide="ship"></i>Marine & Shipbuilding</a></li>
-                                            <li><a href="industry-infrastructure.html" class="mega-item"><i data-lucide="zap"></i>Power Generation Plants</a></li>
+                                            <li><a href="industry-infrastructure.html" class="mega-item">Agriculture & Farming</a></li>
+                                            <li><a href="industry-infrastructure.html" class="mega-item">HVAC & Ventilation</a></li>
+                                            <li><a href="industry-infrastructure.html" class="mega-item">Material Handling & Logistics</a></li>
+                                            <li><a href="industry-infrastructure.html" class="mega-item">Renewable Energy</a></li>
+                                            <li><a href="industry-infrastructure.html" class="mega-item">Packaging & Printing</a></li>
+                                            <li><a href="industry-infrastructure.html" class="mega-item">Marine & Shipbuilding</a></li>
+                                            <li><a href="industry-infrastructure.html" class="mega-item">Power Generation Plants</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -337,7 +336,7 @@
                             <a href="news-blogs.html" class="dropdown-item"><span>Blogs & Articles</span></a>
                         </div>
                     </li>
-                    <li><a href="news-newsletters.html">Downloads</a></li>
+                    <li><a href="catalogue.html">Catalogue</a></li>
                     <li><a href="contact.html">Contact Us</a></li>
                 </ul>
                 <div class="nav-cta">
@@ -353,24 +352,20 @@
     <!-- Split Hero -->
     <section class="engagement-hero">
         <div class="hero-left">
-            <a href="news.html" style="color: var(--primary); display: flex; align-items: center; gap: 10px; margin-bottom: 30px; font-weight: 900; font-size: 11px; text-transform: uppercase; letter-spacing: 2px;">
-                <i data-lucide="terminal" size="16"></i> CD .. / NEWS_HUB
-            </a>
-            <div class="protocol-header" style="font-size: 11px; font-weight: 900; letter-spacing: 5px; color: var(--primary); margin-bottom: 20px; text-transform: uppercase;">EXHIBITION PROTOCOL // NODE.073</div>
-            <h1 style="font-size: clamp(3rem, 10vw, 5rem); color: #fff; line-height: 0.9; font-weight: 900; margin-bottom: 35px;">
+            <h1 style="font-size: clamp(3rem, 10vw, 5rem); color: var(--text-main); line-height: 0.9; font-weight: 900; margin-bottom: 35px; letter-spacing: -3px;">
                 GLOBAL <span class="blue">ENGAGEMENT.</span><br>LOCAL PRECISION.
             </h1>
-            <p style="color: var(--text-muted); font-size: 1.25rem; line-height: 1.7; max-width: 600px; margin-bottom: 50px;">
+            <p style="color: var(--text-muted); font-size: 1.2rem; line-height: 1.7; max-width: 600px; margin-bottom: 50px; font-weight: 500; border-left: 4px solid var(--primary); padding-left: 20px;">
                 Connecting the chronological journey of CNZ industrial innovation. We deploy our technical expertise across major global exhibitions to showcase the future of high-performance engineering.
             </p>
-            <div style="display: flex; gap: 40px;">
+            <div style="display: flex; gap: 60px;">
                 <div>
-                    <span style="display: block; font-size: 2.5rem; font-weight: 900; color: #fff;">15+</span>
-                    <span style="font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--primary);">Annual Events</span>
+                    <span style="display: block; font-size: 3rem; font-weight: 900; color: var(--text-main); line-height: 1;">15+</span>
+                    <span style="font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--primary); font-weight: 800;">Annual Events</span>
                 </div>
                 <div>
-                    <span style="display: block; font-size: 2.5rem; font-weight: 900; color: #fff;">12</span>
-                    <span style="font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--primary);">Global Cities</span>
+                    <span style="display: block; font-size: 3rem; font-weight: 900; color: var(--text-main); line-height: 1;">12</span>
+                    <span style="font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--primary); font-weight: 800;">Global Cities</span>
                 </div>
             </div>
         </div>
@@ -396,20 +391,20 @@
                         <div class="slide-progress-bar" id="slideProgress"></div>
                     </div>
                     <div class="card-content">
-                        <span class="node-id-tag">[ENGAGEMENT: EX.NODE.BENGALURU]</span>
+                        <span class="node-id-tag">REF_NODE // BENGALURU.BIE</span>
                         <h2 class="node-title">EXCON <span class="blue">2025</span></h2>
                         <div class="node-meta">
                             <span class="meta-item"><i data-lucide="calendar"></i> 9-13 DEC 2025</span>
                             <span class="meta-item"><i data-lucide="map-pin"></i> BIEC, BENGALURU</span>
                         </div>
-                        <div style="background: rgba(0, 163, 255, 0.05); padding: 15px; border-left: 3px solid var(--primary); margin-bottom: 25px;">
-                            <span style="display: block; font-size: 10px; font-weight: 900; color: var(--primary); margin-bottom: 5px;">LOCATION DATA:</span>
-                            <p style="color: #fff; font-size: 14px; font-weight: 700; margin: 0;">HALL: 3 | STALLS: A-31 & B-109</p>
+                        <div style="background: rgba(0, 163, 255, 0.05); padding: 20px; border-left: 4px solid var(--primary); margin-bottom: 25px; border-radius: 4px;">
+                            <span style="display: block; font-size: 10px; font-weight: 800; color: var(--primary); margin-bottom: 8px; letter-spacing: 2px;">LOCATION DATA:</span>
+                            <p style="color: var(--text-main); font-size: 15px; font-weight: 800; margin: 0;">HALL: 3 | STALLS: A-31 & B-109</p>
                         </div>
-                        <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 30px;">
+                        <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 30px; font-weight: 500;">
                             Experience advanced engineering solutions purpose-built for construction and heavy industrial applications. Discover our high-speed, high-load, precision-engineered bearing units.
                         </p>
-                        <a href="contact.html" class="btn btn-primary" style="align-self: flex-start; padding: 12px 30px;">Request Notification</a>
+                        <a href="contact.html" class="btn btn-primary" style="align-self: flex-start; padding: 15px 35px; font-weight: 800; text-transform: uppercase; font-size: 12px; letter-spacing: 1px;">Request Notification</a>
                     </div>
                 </div>
             </div>
@@ -420,16 +415,19 @@
                 <div class="engagement-card">
                     <div class="card-poster" style="background-image: url('engimach_tactical_1775891274114.png'); background-size: cover; height: 100%; min-height: 480px; border-right: 1px solid var(--border);"></div>
                     <div class="card-content">
-                        <span class="node-id-tag">[ENGAGEMENT: EX.NODE.GUJARAT]</span>
+                        <span class="node-id-tag">REF_NODE // GUJARAT.EXH</span>
                         <h2 class="node-title">ENGIMACH <span class="blue">XVI</span></h2>
                         <div class="node-meta">
                             <span class="meta-item"><i data-lucide="calendar"></i> DEC 2023</span>
                             <span class="meta-item"><i data-lucide="map-pin"></i> EXHIBITION CENTRE, INDIA</span>
                         </div>
-                        <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 30px;">
+                        <p style="color: var(--text-muted); line-height: 1.8; margin-bottom: 30px; font-weight: 500;">
                             Showcasing precision machine tool bearings and autonomous industrial integration systems. A major hub for Indian manufacturing excellence and precision engineering discourse.
                         </p>
-                        <span style="color: var(--primary); font-weight: 800; font-size: 11px; letter-spacing: 2px;">PROTOCOL: CONCLUDED // ARCHIVE AVAILABLE</span>
+                        <div style="padding: 10px 15px; background: #f8fafc; border: 1px solid var(--border); border-radius: 4px; display: inline-flex; align-items: center; gap: 10px;">
+                            <div style="width: 8px; height: 8px; border-radius: 50%; background: #94a3b8;"></div>
+                            <span style="color: #64748b; font-weight: 800; font-size: 11px; letter-spacing: 2px; text-transform: uppercase;">PROTOCOL: CONCLUDED // ARCHIVE AVAILABLE</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -443,7 +441,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-about">
-                    <img src="assets/logo.png" alt="CNZ Bearings Logo" style="height: 60px; margin-bottom: 20px;">
+                    <img src="assets/logo.png" alt="CNZ Bearings Logo" style="width:140px;height:auto;object-fit:contain;vertical-align:middle;margin:0;padding:0;">
                     <p style="color: var(--text-muted);">Precision manufacturing since 1980. High-performance technical components for global industrial leaders.</p>
                 </div>
                 <div class="footer-column">
@@ -502,11 +500,16 @@
     </div>
 
     <!-- WhatsApp Floating Button (Repositioned to Left) -->
-    <a href="https://wa.me/918511153657" class="whatsapp-float" style="left: 40px !important; right: auto !important;" target="_blank" aria-label="Contact on WhatsApp">
-        <i data-lucide="message-circle"></i>
-        <div class="wa-tooltip">Direct Support</div>
-        <div class="wa-pulse"></div>
-    </a>
+    <a href="https://wa.me/918511153657" class="whatsapp-float" target="_blank" aria-label="Contact on WhatsApp">
+        <div class="wa-ring"></div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+            <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.6-2.8-23.6-8.7-45-27.7-16.6-14.8-27.8-33.1-31.1-38.6-3.2-5.6-.3-8.6 2.5-11.4 2.5-2.5 5.5-6.5 8.3-9.8 2.8-3.2 3.7-5.5 5.5-9.2 1.9-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.6 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+        </svg>
+        <div class="wa-tooltip">
+            Chat with us
+            <div class="wa-scan"></div>
+        </div>
+        <div class="wa-pulse"></div></a>
 
     <script src="main.js"></script>
     <script>
