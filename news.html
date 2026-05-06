@@ -15,6 +15,16 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="style.css">
+    <style>
+        .news-card-title {
+            margin-top: 10px;
+            color: var(--text-main);
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+    </style>
 
 </head>
 
@@ -119,7 +129,7 @@
                 </h1>
 
                 <p style="color: var(--text-muted); font-size: 1.15rem; line-height: 1.7; max-width: 620px; margin-bottom: 35px; font-weight: 500; border-left: 4px solid var(--primary); padding-left: 20px;">
-                    Your centralized repository for real-time industrial events, technical briefings, and planetary engineering excellence from CNZ Bearings.
+                    Your centralized repository for real-time industrial events, technical briefings, and precision bearing engineering from CNZ Bearings.
                 </p>
 
             </div>
@@ -148,12 +158,12 @@
                     </div>
                     <div style="padding: 40px;">
                         
-                        <h3 style="margin-top: 10px; color: var(--text-main); font-weight: 800;"><i data-lucide="calendar" class="blue"></i>Events & <span class="blue">Exhibitions</span></h3>
+                        <h3 class="news-card-title"><i data-lucide="calendar" class="blue"></i>Events & <span class="blue">Exhibitions</span></h3>
                         <p style="color: var(--text-muted); font-size: 14px; line-height: 1.8; margin-top: 15px;">Technical webinars, global trade fairs, and industrial product launch events scheduled for 2026.</p>
                     </div>
                 </a>
 
-                <!-- Portal 02: Catalogue -->
+                <!-- Portal 02: Newsletter -->
                 <a href="news-newsletters.html" class="narrative-card" style="text-decoration: none; padding: 0; background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--primary);">
                     <div class="card-bracket bracket-tl"></div>
                     <div class="card-bracket bracket-tr"></div>
@@ -161,13 +171,13 @@
                     <div class="card-bracket bracket-br"></div>
                     <div class="scan-line"></div>
                     <div class="leader-image-wrap" style="height: 250px; position: relative; overflow: hidden; border-bottom: 1px solid rgba(0, 163, 255, 0.1);">
-                        <img src="assets/newsletter_th_08.png" alt="Catalogue" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(1.0) contrast(1.0);">
+                        <img src="assets/newsletter_th_08.png" alt="Newsletter" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(1.0) contrast(1.0);">
                         <div style="position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, rgba(255, 255, 255, 0.9), transparent);"></div>
                     </div>
                     <div style="padding: 40px;">
                         
-                        <h3 style="margin-top: 10px; color: var(--text-main); font-weight: 800;"><i data-lucide="book" class="blue"></i>NEWSLETTERS</h3>
-                        <p style="color: var(--text-muted); font-size: 14px; line-height: 1.8; margin-top: 15px;">Comprehensive industrial product listings and technical specifications. A deep-dive into the state of planetary bearing technology.</p>
+                        <h3 class="news-card-title"><i data-lucide="book" class="blue"></i>NEWSLETTERS</h3>
+                        <p style="color: var(--text-muted); font-size: 14px; line-height: 1.8; margin-top: 15px;">Company updates, product announcements, and industry insights delivered directly from CNZ Bearings.</p>
                     </div>
                 </a>
 
@@ -184,7 +194,7 @@
                     </div>
                     <div style="padding: 40px;">
                         
-                        <h3 style="margin-top: 10px; color: var(--text-main); font-weight: 800;"><i data-lucide="book-open" class="blue"></i>Technical <span class="blue">Library</span></h3>
+                        <h3 class="news-card-title"><i data-lucide="book-open" class="blue"></i>Technical <span class="blue">Library</span></h3>
                         <p style="color: var(--text-muted); font-size: 14px; line-height: 1.8; margin-top: 15px;">In-depth technical white papers on metallurgy, high-heat lubrication, and bearing life cycle optimization.</p>
                     </div>
                 </a>
@@ -203,14 +213,15 @@
                 
                 <div class="rm-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 80px; align-items: center;">
                     <div>
-                        <h3 style="color: var(--text-main); font-size: 3rem; margin: 20px 0; font-weight: 900; letter-spacing: -2.5px; line-height: 1.1;">OPTIMIZING BEARING LIFE IN <span class="blue">HIGH-HEAT</span></h3>
+                        <h3 style="color: var(--text-main); font-size: 3rem; margin: 20px 0; font-weight: 900; letter-spacing: -2.5px; line-height: 1.1;">OPTIMIZING BEARING LIFE IN <span class="blue">HIGH-HEAT</span> ENVIRONMENTS</h3>
+                        <span style="font-size: 11px; color: var(--text-muted); letter-spacing: 2px; text-transform: uppercase;">MAY 2026</span>
                         <p style="color: var(--text-muted); margin-bottom: 40px; font-size: 1.1rem; line-height: 1.8; font-weight: 500;">Technical teardown of new UCP-specific lubrication profiles designed for 200°C+ continuous operation in heavy industrial processing plants.</p>
                         <a href="news-blogs.html" class="btn btn-primary" style="padding: 18px 35px; font-weight: 800; width: fit-content; display: flex; align-items: center; gap: 15px; text-transform: uppercase; letter-spacing: 1px; font-size: 13px;">
                             <i data-lucide="shield-check" size="20"></i> ACCESS FULL ARCHIVE
                         </a>
                     </div>
                     <div style="position: relative; border-radius: 4px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 15px 40px rgba(0,0,0,0.08);">
-                        <img src="assets/hero_bearing.jpg" alt="Featured Article" style="width: 100%; display: block; filter: brightness(1.0) contrast(1.05);">
+                        <img src="assets/hero_bearing.jpg" alt="High-heat industrial bearing lubrication setup in a processing plant" style="width: 100%; display: block; filter: brightness(1.0) contrast(1.05);">
                         <div class="card-scan" style="background: linear-gradient(to bottom, transparent, rgba(0, 163, 255, 0.05), transparent);"></div>
                     </div>
                 </div>
@@ -243,7 +254,7 @@
                     <h4>News Section</h4>
                     <ul class="footer-links">
                         <li><a href="news-events.html">Events Listing</a></li>
-                        <li><a href="catalogue.html">Catalogue Archive</a></li>
+                        <li><a href="news-newsletters.html">Newsletters</a></li>
                         <li><a href="news-blogs.html">Technical Blog</a></li>
                     </ul>
                 </div>
