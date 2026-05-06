@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Heritage Narrative | CNZ Bearings - Pure Engineering</title>
+    <title>About Us | CNZ Bearings - Precision Bearing Manufacturer Since 1980</title>
     <meta name="description"
-        content="Dive into the CNZ Bearings technical architecture. A focus on precision manufacturing and industrial reliability.">
+        content="CNZ Bearings — precision pillow block bearing manufacturer since 1980. Learn about our vision, leadership, ISO 9001:2015 certification, and 46-year manufacturing heritage.">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -685,7 +685,11 @@
             .tech-narrative-grid { grid-template-columns: 1fr; }
             .timeline-vertical-pipe { left: 20px; transform: none; }
             .milestone-item { width: 100%; margin-left: 0 !important; margin-right: 0 !important; text-align: left !important; padding-left: 60px; }
-            .milestone-dot { left: 13px !important; }
+            .milestone-dot {
+                left: 13px !important;
+                right: auto !important;
+                transform: translateX(-50%) !important;
+            }
             .video-metadata { flex-direction: column; gap: 10px; align-items: center; text-align: center; }
         }
         @keyframes hudPulse {
@@ -716,7 +720,7 @@
         <div class="container nav-container">
             <nav>
                 <div class="logo-container">
-                    <a href="index.html" class="logo"><img src="assets/logo.png" alt="CNZ Bearings Logo"></a>
+                    <a href="index.html" class="logo"><img src="assets/Logo001.png" alt="CNZ Bearings Logo"></a>
                 </div>
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
@@ -802,7 +806,7 @@
                 <span class="reveal-wrap"><span class="reveal-line line-2">FOR GLOBAL INDUSTRY</span></span>
             </h1>
             <p style="color: rgba(255,255,255,0.8); font-size: 1.2rem; line-height: 1.8; max-width: 700px; margin: 0 0 50px;">
-                CNZ Bearings delivers high-performance technical components built on 44 years of manufacturing heritage and industrial integrity.
+                CNZ Bearings delivers high-performance technical components built on 46 years of manufacturing heritage and industrial integrity.
             </p>
             <div class="hero-btns-pill">
                 <a href="#vision" class="btn-pill btn-pill-primary">Our Vision</a>
@@ -820,7 +824,7 @@
                 <p>Strategic directives powering our commitment to global industrial excellence and sustainable precision.</p>
             </div>
             
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 180px; position: relative;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: clamp(60px, 10vw, 180px); position: relative;">
                 <!-- Absolute Connector Layer -->
                 <div class="vm-connector-wrapper">
                     <div class="vm-node left"><i data-lucide="eye"></i></div>
@@ -849,7 +853,7 @@
     <section id="leadership" class="section reveal reveal-up">
         <div class="container">
             <div class="section-title">
-                <span class="industrial-label">COMMAND HIERARCHY</span>
+                <span class="industrial-label">LEADERSHIP TEAM</span>
                 <h2>OUR <span class="blue">DIRECTORS</span></h2>
                 <p>Governing industrial excellence through four decades of manufacturing integrity.</p>
             </div>
@@ -857,7 +861,7 @@
             <div class="leader-id-grid">
                 <!-- Bharat Mehta -->
                 <div class="leader-row">
-                    <div class="leader-photo"><img src="assets/director_bharat.png" alt="Bharat Mehta"></div>
+                    <div class="leader-photo"><img src="assets/director_bharat.png" alt="Bharat Mehta, Executive Director of CNZ Bearings"></div>
                     <div class="leader-bio">
                         <span class="narrative-id-tag">EXECUTIVE DIRECTOR</span>
                         <h4>Bharat Mehta</h4>
@@ -868,7 +872,7 @@
 
                 <!-- Prakash Mehta -->
                 <div class="leader-row">
-                    <div class="leader-photo"><img src="assets/director_prakash.png" alt="Prakash Mehta"></div>
+                    <div class="leader-photo"><img src="assets/director_prakash.png" alt="Prakash Mehta, Executive Director of CNZ Bearings"></div>
                     <div class="leader-bio">
                         <span class="narrative-id-tag">EXECUTIVE DIRECTOR</span>
                         <h4>Prakash Mehta</h4>
@@ -930,7 +934,7 @@
                     </div>
                     
                     <div style="margin-top: 30px;">
-                        <span class="protocol-header" style="letter-spacing: 2px; font-size: 9px;">STATUS: VERIFIED // OPERATIONAL</span>
+                        <span class="protocol-header" style="letter-spacing: 2px; font-size: 9px;">STATUS: RENEWAL IN PROGRESS</span>
                     </div>
                 </div>
             </div>
@@ -999,7 +1003,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-about">
-                    <img src="assets/logo.png" alt="CNZ Bearings Logo" style="width:140px;height:auto;object-fit:contain;vertical-align:middle;margin:0;padding:0; filter: brightness(0) invert(1);">
+                    <img src="assets/Logo001.png" alt="CNZ Bearings Logo" style="width:180px;height:auto;object-fit:contain;vertical-align:middle;margin:0;padding:0;margin-bottom:15px;">
                     <p>Precision manufacturing since 1980. High-performance technical components for global industrial leaders.</p>
                 </div>
                 <div class="footer-column">
@@ -1011,10 +1015,18 @@
                     </ul>
                 </div>
                 <div class="footer-column">
+                    <h4>News Section</h4>
+                    <ul class="footer-links">
+                        <li><a href="news-events.html">Events Listing</a></li>
+                        <li><a href="news-newsletters.html">Newsletters</a></li>
+                        <li><a href="news-blogs.html">Technical Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
                     <h4>Contact Us</h4>
                     <ul class="footer-contact">
                         <li><i data-lucide="phone"></i> +91 8511153657</li>
-                        <li><i data-lucide="mail"></i> pillowblock@cnzbearings.com</li>
+                        <li><i data-lucide="mail"></i> info@cnzbearings.com</li>
                     </ul>
                 </div>
             </div>
