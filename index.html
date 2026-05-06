@@ -730,6 +730,12 @@
                         <div class="client-logo"><img src="assets/client_bkt.png" alt="BKT Tyres"></div>
                     </div>
                 </div>
+
+                <!-- Manual Navigation Option -->
+                <div class="marquee-controls">
+                    <button class="marquee-btn prev" aria-label="Previous"><i data-lucide="chevron-left"></i></button>
+                    <button class="marquee-btn next" aria-label="Next"><i data-lucide="chevron-right"></i></button>
+                </div>
             </div>
         </div>
     </section>
@@ -898,6 +904,68 @@
                 if (!hubWrapper.contains(e.target)) {
                     hubWrapper.classList.remove('active');
                 }
+            });
+        }
+
+        // --- CLIENT MARQUEE MANUAL OVERRIDE ---
+        const marqueeTrack = document.querySelector('.marquee-track');
+        const marqueePrev = document.querySelector('.marquee-btn.prev');
+        const marqueeNext = document.querySelector('.marquee-btn.next');
+        let isMarqueeManual = false;
+        let marqueeX = 0;
+
+        function stopMarquee() {
+            if (!isMarqueeManual) {
+                const style = window.getComputedStyle(marqueeTrack);
+                const matrix = new WebKitCSSMatrix(style.transform);
+                marqueeX = matrix.m41;
+                marqueeTrack.style.animation = 'none';
+                marqueeTrack.style.transform = `translateX(${marqueeX}px)`;
+                isMarqueeManual = true;
+            }
+        }
+
+        if (marqueeNext && marqueePrev) {
+            marqueeNext.addEventListener('click', () => {
+                stopMarquee();
+                const contentWidth = marqueeTrack.firstElementChild.offsetWidth + 60; // Content + Gap
+                
+                marqueeX -= 280; // Standard jump
+                
+                // Seamless Loop: If we scroll past the first set, snap back to the start of the second set
+                if (Math.abs(marqueeX) >= contentWidth) {
+                    marqueeTrack.style.transition = 'none';
+                    marqueeX += contentWidth;
+                    marqueeTrack.style.transform = `translateX(${marqueeX}px)`;
+                    // Force reflow
+                    marqueeTrack.offsetHeight;
+                }
+                
+                setTimeout(() => {
+                    marqueeTrack.style.transition = 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
+                    marqueeTrack.style.transform = `translateX(${marqueeX}px)`;
+                }, 10);
+            });
+
+            marqueePrev.addEventListener('click', () => {
+                stopMarquee();
+                const contentWidth = marqueeTrack.firstElementChild.offsetWidth + 60;
+
+                marqueeX += 280;
+
+                // Seamless Loop: If we scroll past the start, snap to the duplicated set
+                if (marqueeX > 0) {
+                    marqueeTrack.style.transition = 'none';
+                    marqueeX -= contentWidth;
+                    marqueeTrack.style.transform = `translateX(${marqueeX}px)`;
+                    // Force reflow
+                    marqueeTrack.offsetHeight;
+                }
+
+                setTimeout(() => {
+                    marqueeTrack.style.transition = 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
+                    marqueeTrack.style.transform = `translateX(${marqueeX}px)`;
+                }, 10);
             });
         }
     </script>
