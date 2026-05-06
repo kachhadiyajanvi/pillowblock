@@ -4084,11 +4084,6 @@ footer {
     margin-bottom: 150px !important;
 }
 
-.article-console:hover {
-    border-color: var(--primary);
-    box-shadow: 0 60px 120px rgba(0, 0, 0, 0.6), var(--glow-primary);
-    transform: translateY(-5px);
-}
 
 .progress-scanner {
     position: fixed;
@@ -4104,18 +4099,11 @@ footer {
 
 .focus-block {
     position: relative;
-    opacity: 0.7;
-    transform: translateX(0);
-    transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+    opacity: 1;
     margin-bottom: 25px !important;
-    color: var(--text-muted) !important;
+    color: #000 !important;
 }
 
-.focus-block:hover {
-    opacity: 1;
-    transform: translateX(10px);
-    color: #fff !important;
-}
 
 .focus-block::before {
     content: "";
@@ -4130,14 +4118,10 @@ footer {
  transition: all 0.3s ease;
 }
 
-.focus-block:hover::before {
- transform: translateY(-50%) scale(1);
- box-shadow: var(--glow-primary);
-}
 
 .console-heading {
  position: relative;
- color: #fff !important;
+ color: #000 !important;
  font-weight: 900 !important;
  text-transform: uppercase;
  letter-spacing: 1px;
@@ -4157,9 +4141,6 @@ footer {
  transition: width 0.5s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-.article-console:hover .console-heading::after {
- width: 100%;
-}
 
 .neon-link {
  color: var(--primary);
@@ -4633,3 +4614,7 @@ footer {
 section {
     overflow: hidden; /* Prevent reveal offsets from causing scrollbars */
 }
+
+/* User requested dossier-card rules */
+.dossier-card { display: flex; flex-direction: column; }
+
