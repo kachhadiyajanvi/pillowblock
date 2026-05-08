@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Dossier | CNZ Bearings</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="assets/product-data.js"></script>
+    <style>
+        .dossier-hero {
+            padding: 180px 0 100px;
+            background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%);
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        .dossier-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 80px;
+            align-items: center;
+        }
+        .spec-sidebar {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.03);
+        }
+        .tech-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+        .tech-table td {
+            padding: 15px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .tech-table .label {
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .tech-table .value {
+            color: var(--text-main);
+            font-weight: 800;
+            text-align: right;
+            font-family: 'Inter', monospace;
+            font-size: 16px;
+        }
+        .dossier-visual {
+            position: relative;
+            perspective: 2000px;
+        }
+        .dossier-image-wrap {
+            width: 100%;
+            padding-bottom: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease-out;
+        }
+        .dossier-image-wrap img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            height: auto;
+            filter: drop-shadow(0 30px 60px rgba(0,163,255,0.15));
+        }
+        .series-tag {
+            background: var(--primary);
+            color: white;
+            padding: 6px 15px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 800;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .back-nav {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+        .back-nav:hover {
+            transform: translateX(-5px);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav-container">
+            <nav>
+                <div class="logo-container">
+                    <a href="index.html" class="logo"><img src="assets/Logo001.png" alt="CNZ Bearings Logo"></a>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="catalogue.html" class="active">Catalogue</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="dossierContent">
+        <!-- Content will be injected here by JS -->
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const model = params.get('model');
+            const product = PRODUCT_DATA[model];
+
+            if (!product) {
+                document.getElementById('dossierContent').innerHTML = `
+                    <div class="container" style="padding: 200px 0; text-align: center;">
+                        <h1>Product Not Found</h1>
+                        <p>The requested model dossier could not be located in our technical archives.</p>
+                        <a href="catalogue.html" class="btn btn-primary" style="margin-top: 30px;">Back to Catalogue</a>
+                    </div>
+                `;
+                return;
+            }
+
+            // Determine correct image based on series
+            let seriesImg = 'assets/cnz_blue_bearing.png';
+            if (product.series === 'UCF') seriesImg = 'assets/ucf_blue.png';
+            if (product.series === 'UCFL') seriesImg = 'assets/ucfl_blue.png';
+            if (product.series === 'UCFC') seriesImg = 'assets/ucfc_blue.png';
+            if (product.series === 'UCT') seriesImg = 'assets/uct_blue.png';
+
+            const specsHtml = Object.entries(product.specs).map(([label, value]) => `
+                <tr>
+                    <td class="label">${label}</td>
+                    <td class="value">${value}</td>
+                </tr>
+            `).join('');
+
+            document.getElementById('dossierContent').innerHTML = `
+                <section class="dossier-hero">
+                    <div class="container">
+                        <a href="product-${product.series.toLowerCase()}.html" class="back-nav">
+                            <i data-lucide="arrow-left"></i> Back to ${product.series} Series
+                        </a>
+                        <div class="dossier-grid">
+                            <div class="dossier-info">
+                                <span class="series-tag">${product.series} SERIES</span>
+                                <h1 style="font-size: 5rem; font-weight: 900; line-height: 1; margin-bottom: 10px;">${product.designation}</h1>
+                                <p style="font-size: 1.5rem; color: var(--text-muted); font-weight: 500;">Pillow Block Unit — Shaft Diameter: <span class="blue">${product.shaft}mm</span></p>
+                                
+                                <div class="spec-sidebar" style="margin-top: 50px;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--primary); padding-bottom: 15px;">
+                                        <h3 style="font-weight: 900; letter-spacing: 1px;">TECHNICAL DOSSIER</h3>
+                                        <i data-lucide="shield-check" style="color: var(--primary);"></i>
+                                    </div>
+                                    <table class="tech-table">
+                                        ${specsHtml}
+                                        <tr>
+                                            <td class="label">Bearing Model</td>
+                                            <td class="value" style="color: var(--primary);">${product.bearing}</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="label">Mounting Bolt</td>
+                                            <td class="value">${product.bolt}</td>
+                                        </tr>
+                                    </table>
+                                    <div style="margin-top: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                        <a href="contact.html" class="btn btn-primary" style="width: 100%; text-align: center;">Get Quote</a>
+                                        <a href="contact.html" class="btn btn-outline" style="width: 100%; text-align: center;">Request CAD</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="dossier-visual">
+                                <div class="dossier-image-wrap" id="dossierTilt">
+                                    <img src="${seriesImg}" alt="${product.designation} Render">
+                                </div>
+                                <div style="position: absolute; bottom: -20px; right: 0; text-align: right;">
+                                    <div style="font-family: monospace; font-size: 10px; color: var(--text-muted); letter-spacing: 2px;">CNZ_TAC_UNIT_V.4.0</div>
+                                    <div style="font-family: monospace; font-size: 10px; color: var(--primary); font-weight: 800;">PRECISION_ENGINEERED</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="section">
+                    <div class="container">
+                        <div class="section-title">
+                            <span class="industrial-label">SERIES OVERVIEW</span>
+                            <h2>Engineering <span class="blue">Excellence</span></h2>
+                        </div>
+                        <div class="grid" style="grid-template-columns: repeat(3, 1fr); gap: 30px;">
+                            <div style="padding: 30px; background: #f8fafc; border-radius: 8px;">
+                                <i data-lucide="gauge" style="color: var(--primary); margin-bottom: 20px;"></i>
+                                <h4 style="font-weight: 800; margin-bottom: 15px;">High-Speed Reliability</h4>
+                                <p style="font-size: 14px; color: var(--text-muted);">Optimized internal geometry for sustained high-rotation performance with minimal heat generation.</p>
+                            </div>
+                            <div style="padding: 30px; background: #f8fafc; border-radius: 8px;">
+                                <i data-lucide="anvil" style="color: var(--primary); margin-bottom: 20px;"></i>
+                                <h4 style="font-weight: 800; margin-bottom: 15px;">Rugged Durability</h4>
+                                <p style="font-size: 14px; color: var(--text-muted);">Heavy-duty cast iron housing designed to withstand extreme radial and axial loads in harsh environments.</p>
+                            </div>
+                            <div style="padding: 30px; background: #f8fafc; border-radius: 8px;">
+                                <i data-lucide="settings-2" style="color: var(--primary); margin-bottom: 20px;"></i>
+                                <h4 style="font-weight: 800; margin-bottom: 15px;">Easy Alignment</h4>
+                                <p style="font-size: 14px; color: var(--text-muted);">Self-aligning feature compensates for structural misalignments during installation and operation.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            `;
+
+            lucide.createIcons();
+
+            // Add 3D tilt effect
+            const tiltWrap = document.getElementById('dossierTilt');
+            document.addEventListener('mousemove', (e) => {
+                const x = e.clientX / window.innerWidth - 0.5;
+                const y = e.clientY / window.innerHeight - 0.5;
+                tiltWrap.style.transform = `rotateX(${y * -20}deg) rotateY(${x * 20}deg)`;
+            });
+        });
+    </script>
+</body>
+</html>
