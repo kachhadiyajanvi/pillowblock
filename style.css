@@ -844,6 +844,7 @@ nav {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 25px;
     margin-top: 30px;
+    align-items: start;
 }
 
 
@@ -2861,6 +2862,55 @@ footer {
     animation-play-state: paused;
 }
 
+/* Manual Controls */
+.marquee-controls {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+    pointer-events: none;
+    z-index: 20;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.clients-section:hover .marquee-controls {
+    opacity: 1;
+}
+
+.marquee-btn {
+    width: 45px;
+    height: 45px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    pointer-events: auto;
+    color: var(--text-main);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    backdrop-filter: blur(10px);
+}
+
+.marquee-btn:hover {
+    background: var(--primary);
+    color: var(--white);
+    border-color: var(--primary);
+    transform: scale(1.1);
+}
+
+.marquee-btn i {
+    width: 20px;
+    height: 20px;
+}
+
 .client-logo {
     width: 220px;
     height: 120px;
@@ -4617,4 +4667,60 @@ section {
 
 /* User requested dossier-card rules */
 .dossier-card { display: flex; flex-direction: column; }
+
+/* Product Card Expansion System */
+.card-details-hidden {
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+.spec-tile.expanded .card-details-hidden {
+    max-height: 1000px; /* Large enough for content */
+    opacity: 1;
+    transform: translateY(0);
+    margin-top: 20px;
+}
+
+.know-more-btn {
+    width: 100%;
+    background: rgba(0, 163, 255, 0.05);
+    border: 1px solid rgba(0, 163, 255, 0.2);
+    color: var(--primary);
+    padding: 10px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.know-more-btn:hover {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 163, 255, 0.3);
+}
+
+.know-more-btn i {
+    transition: transform 0.3s ease;
+}
+
+.spec-tile.expanded .know-more-btn i {
+    transform: rotate(180deg);
+}
+
+.spec-tile.expanded .know-more-btn {
+    background: var(--text-main);
+    color: white;
+    border-color: var(--text-main);
+}
 
